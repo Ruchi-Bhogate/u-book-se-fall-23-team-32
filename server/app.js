@@ -17,16 +17,16 @@ mongoose.connect(process.env.MONGO_URI,{
 app.use(morgan("dev"));
 app.use(express.json())
 app.use(cors({origin : true,credentials : true}));
-/*app.post('/api/register',(req,res)=> {
+app.post('/api/register',(req,res)=> {
     console.log(req.body)
     res.json({status: 'ok'})  
-})*/
+})
 //routes
 
 //ports
 const port  = process.env.PORT || 8080;
 
 // listener
-const server = app.listen(8080, () =>
+const server = app.listen(port, () =>
   console.log(`Server is running on port ${port}`)
 );
