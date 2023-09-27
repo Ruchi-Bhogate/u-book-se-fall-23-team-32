@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React,{ useState } from 'react';
 import './App.css';
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
   async function Register(event) {
     event.preventDefault()
     const response = await fetch('https://localhost:8080/api/register', {
-        method: 'POST',
+          method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
@@ -28,23 +28,23 @@ function App() {
       <h1>Registration</h1>
       <form onSubmit={Register}>
         <input
-          //value={name}
+          value={name}
           onChange={(e) => SetName(e.target.value)}
           type = "text"
           placeholder = "Username"
         />
         <br />
         <input
-          //value={email}
+          value={email}
           onChange={(e) => SetEmail(e.target.value)}
-          type = "text"
+          type = "email"
           placeholder = "Email"
         />
         <br />
         <input
-          //value={password}
+          value={password}
           onChange={(e) => SetPassword(e.target.value)}
-          type = "text"
+          type = "password"
           placeholder = "Password"
         /> 
         <input type = "Submit" value = "Register"/>
