@@ -16,7 +16,7 @@ mongoose.connect(process.env.MONGO_URI,{
 //middleware
 app.use(morgan("dev"));
 app.use(express.json())
-app.use(cors({origin : true,credentials : true}));
+app.use(cors());
 app.post('/api/register',(req,res)=> {
     console.log(req.body)
     res.json({status: 'ok'})  
