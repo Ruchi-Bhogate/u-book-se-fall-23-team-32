@@ -6,7 +6,7 @@ const cors = require('cors');
 require("dotenv").config();
 
 //app
-const app =express();
+const app = express();
 
 //db
 mongoose.connect(process.env.MONGO_URI,{
@@ -15,7 +15,12 @@ mongoose.connect(process.env.MONGO_URI,{
 }).then(() => console.log("DB CONNECTED")).catch(err => console.log("DB CONNECTION ERROR", err));
 //middleware
 app.use(morgan("dev"));
+app.use(express.json())
 app.use(cors({origin : true,credentials : true}));
+app.post('/api/register',(req,res)=> {
+    console.log(req.body)
+    res.json({status: 'ok'})  
+})
 //routes
 
 //ports
