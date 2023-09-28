@@ -30,7 +30,7 @@ function Signup() {
           //value={name}
           onChange={(e) => SetName(e.target.value)}
           type = "text"
-          placeholder = "Username"
+          placeholder = "name"
         />
         <br />
         <input

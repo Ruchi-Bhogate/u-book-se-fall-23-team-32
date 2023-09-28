@@ -1,18 +1,18 @@
-// Login.js
+
 
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../styles/Login.css';
 
 function Login() {
-  const [email, setEmail] = useState('');
+  const [emailOrUsername, setEmailOrUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:8080/login', {
-        email,
+        emailOrUsername,
         password,
       });
       console.log(response.data);
@@ -25,8 +25,8 @@ function Login() {
     <div >
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Email:</label>
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          <label>Email or Username:</label>
+          <input type="text" value={emailOrUsername} onChange={(e) => setEmailOrUsername(e.target.value)} />
         </div>
         <div>
           <label>Password:</label>
@@ -35,6 +35,7 @@ function Login() {
         <button type="submit">Login</button>
       </form>
       <p>Don't have an account? <a href="/signup">Sign up</a></p>
+      <a href="http://localhost:8080/auth/google">Login with Google</a>
     </div>
   );
 }
