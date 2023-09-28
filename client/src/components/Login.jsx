@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
+import '../styles/Login.css';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -21,7 +22,7 @@ function Login() {
   };
 
   return (
-    <div>
+    <div >
       <form onSubmit={handleSubmit}>
         <div>
           <label>Email:</label>
