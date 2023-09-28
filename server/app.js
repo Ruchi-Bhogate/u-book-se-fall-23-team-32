@@ -17,10 +17,11 @@ mongoose.connect(process.env.MONGO_URI,{
 app.use(morgan("dev"));
 app.use(express.json())
 app.use(cors());
-app.post('/api/register',(req,res)=> {
-    console.log(req.body)
-    res.json({status: 'ok'})  
-})
+// app.post('/api/register',(req,res)=> {
+//     console.log(req.body)
+//     res.json({status: 'ok'})  
+// })
+app.use("/", require('./routes/user'));
 //routes
 
 //ports
