@@ -7,7 +7,7 @@ function Signup() {
   
   async function Register(event) {
     event.preventDefault()
-    const response = await fetch('http://localhost:8080/api/register', {
+    const response = await fetch('http://localhost:8080/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
