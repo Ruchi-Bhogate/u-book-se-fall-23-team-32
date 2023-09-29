@@ -10,7 +10,13 @@ import Home from './components/Home';
 =======
 import Forgot from './components/Forgot';
 import Reset from './components/Reset';
+<<<<<<< HEAD
 >>>>>>> dc78b17d (current version)
+=======
+import Home from './components/Home';
+import Forgot from './components/Forgot';
+import Reset from './components/Reset';
+>>>>>>> 2b027368 (current version)
 
 function App() {
   return (
