@@ -8,6 +8,8 @@ import Landing from './components/Landing';
 import Forgot from './components/Forgot';
 import Reset from './components/Reset';
 import Home from './components/Home';
+import Forgot from './components/Forgot';
+import Reset from './components/Reset';
 
 function App() {
   return (
