@@ -18,7 +18,7 @@ router.post('/reset', async (req, res) => {
       if (!validPassword) return res.status(400).send('Invalid password');
   
       res.send('Logged in successfully');
-    } catch (error) {
+    }} catch (error) {
       res.status(500).send(error.message);
     }
   });
