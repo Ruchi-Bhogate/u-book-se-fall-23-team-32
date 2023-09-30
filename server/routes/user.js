@@ -1,9 +1,11 @@
-
-
+//import { reset_email } from '../models/email_template';
+const template = () => require('../models/email_template');
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user_model');
 const bcrypt = require('bcrypt');
+const nodemailer = require('nodemailer');
+
 
 router.post('/login', async (req, res) => {
   try {
@@ -44,4 +46,31 @@ router.post('/signup', async (req, res) => {
     }
   });
 
+  router.post('/Forgot', async (req,res) => {
+    const email = template.reset_email
+    let mailTransport = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+            user:"ubookint@gmail.com",
+            pass:"UBookgroup32"
+        }
+    });
+    const details = {
+        from:"Support@UBook.com",
+        to:req.body.email,
+        subject:"Password Reset",
+        text:"Password Reset",
+        html: email
+    }
+    /*const mailTransport.sendMail(details, (err)=>{
+        if(err) {
+           return res.status(400).send("unable to send mail");
+        }
+        else {
+            res.send("email has been sent");
+        }
+    })*/
+    const check = await mailTransport.sendMail(details);
+    console.log =("Status ",check.status);
+});
 module.exports = router;
