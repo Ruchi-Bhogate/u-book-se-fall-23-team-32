@@ -1,4 +1,5 @@
 import etem from "../models/email_template";
+//const template = require('../models/email_template');
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user_model');

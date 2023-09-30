@@ -5,15 +5,15 @@ import axios from 'axios';
 
 function Forgot() {
 
-  const [emailOrUsername, setEmailOrUsername] = useState('');
+  const [email, setEmail] = useState('');
 
   const sendEmail = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/forgot', {
-        emailOrUsername
+      const response = await axios.post('http://localhost:8080/Forgot', {
+        email
       });
-      console.log(response.data);
+      //console.log(response.data);
     } catch (error) {
       console.error('Not a valid email or username:', error.response.data);
     }
@@ -24,9 +24,9 @@ function Forgot() {
       <form onSubmit={sendEmail}>
         <div>
           <label>Password Recovery:</label>
-          <input type="text" placeholder = "email or username" value={emailOrUsername} onChange={(e) => setEmailOrUsername(e.target.value)} />
+          <input type="email" placeholder = "Please type your email here" value={email} onChange={(e) => setEmail(e.target.value)} />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit">Send</button>
       </form>
     </div>
   );

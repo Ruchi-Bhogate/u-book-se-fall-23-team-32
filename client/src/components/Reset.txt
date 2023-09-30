@@ -6,7 +6,7 @@ import axios from 'axios';
 function Reset() {
   
   const [password, setPassword] = useState('');
-
+  const [username, setEmailOrUsername] = findOne
   const doReset = async (e) => {
     e.preventDefault();
     try {
