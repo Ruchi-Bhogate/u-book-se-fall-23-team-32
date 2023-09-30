@@ -1,5 +1,5 @@
-import React from 'react';
 import { useState } from 'react';
+
 function Signup() {
   const [name, SetName] = useState('')
   const [email, SetEmail] = useState('')
