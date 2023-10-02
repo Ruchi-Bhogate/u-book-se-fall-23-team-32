@@ -32,16 +32,22 @@ router.post('/signup', async (req, res) => {
       const emailName = req.body.email.split('@')[0];
       const randomNum = Math.floor(Math.random() * 10000);
       const username = `${emailName}${randomNum}`;
+
+      if(req.body.password != req.body.confirmpassword)
+      res.send({message: 'password not matched'});
       const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
       const user = await User.create({
-        name: req.body.name,
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        role: req.body.role,
         email: req.body.email,
         username: username,
         password: hashedPassword,
       })
       res.json({status :'ok'})
     } catch (error) {
+        console.log(error)
         res.json({status: 'error', error: 'Duplicate email'})
     }
   });
