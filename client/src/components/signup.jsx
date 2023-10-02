@@ -31,7 +31,7 @@ function Signup() {
     const data = await response.json()
     console.log(data)
     setSignUpResponseMsg(data.message)
-    if(signUpResponseMsg != "password not matched") {
+    if(signUpResponseMsg == "ok") {
       navigate("/login")
     }
 

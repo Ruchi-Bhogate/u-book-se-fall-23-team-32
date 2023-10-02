@@ -45,7 +45,7 @@ router.post('/signup', async (req, res) => {
         username: username,
         password: hashedPassword,
       })
-      res.json({status :'ok'})
+      res.send({message :'ok'})
     } catch (error) {
         console.log(error)
         res.json({status: 'error', error: 'Duplicate email'})
