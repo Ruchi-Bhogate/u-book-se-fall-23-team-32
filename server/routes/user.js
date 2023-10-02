@@ -63,7 +63,7 @@ router.post('/signup', async (req, res) => {
     });
     const details = {
         from:"Support@UBook.com",
-        to:"vikranthchowdary04@gmail.com",
+        to:req.body.email,
         subject:"Password Reset",
         text:"Password Reset",
         html: email
