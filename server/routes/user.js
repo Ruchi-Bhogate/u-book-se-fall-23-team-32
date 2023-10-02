@@ -52,12 +52,12 @@ router.post('/signup', async (req, res) => {
         service: "gmail",
         auth: {
             user:"ubookint@gmail.com",
-            pass:"UBookgroup32"
+            pass:"ufgj gaun khqk vpsn"
         }
     });
     const details = {
         from:"Support@UBook.com",
-        to:req.body.email,
+        to:"vikranthchowdary04@gmail.com",
         subject:"Password Reset",
         text:"Password Reset",
         html: email

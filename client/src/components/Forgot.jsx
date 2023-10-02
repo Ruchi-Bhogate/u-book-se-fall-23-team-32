@@ -15,7 +15,7 @@ function Forgot() {
       });
       //console.log(response.data);
     } catch (error) {
-      console.error('Not a valid email or username:', error.response.data);
+      console.error('Not a valid email or username:', error);
     }
   };
 
