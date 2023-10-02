@@ -1,5 +1,3 @@
-//import { reset_email } from '../models/email_template';
-const template = () => require('../models/email_template');
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user_model');
@@ -53,7 +51,8 @@ router.post('/signup', async (req, res) => {
   });
 
   router.post('/Forgot', async (req,res) => {
-    const email = template.reset_email
+    const email = req.body.email
+    const user = await User.findOne({ email: req.body.email});
     let mailTransport = nodemailer.createTransport({
         service: "gmail",
         auth: {
@@ -63,20 +62,27 @@ router.post('/signup', async (req, res) => {
     });
     const details = {
         from:"Support@UBook.com",
-        to:req.body.email,
+        to:email,
         subject:"Password Reset",
-        text:"Password Reset",
-        html: email
+        //text:'http://localhost:3000/Reset/${user._id}'
+        html: "<p>Hi, This email is being sent in response to a password reset request. Please click <a href ='http://localhost:3000/Reset/${user_.id}/'>here</a> to reset your password.</p>"
     }
-    /*const mailTransport.sendMail(details, (err)=>{
-        if(err) {
-           return res.status(400).send("unable to send mail");
-        }
-        else {
-            res.send("email has been sent");
-        }
-    })*/
     const check = await mailTransport.sendMail(details);
     console.log =("Status ",check.status);
 });
+
+  router.post('/reset', async (req, res) => {
+    const {id} = req.params
+    //const {password} = req.body
+    const password = await bcrypt.hash(req.body.password, 10);
+
+    try{
+      User.findByIdAndUpdate({_id:id},{password})
+      res.send('Password was changed');
+    }
+    catch (error) {
+      res.status(500).send(error.message)
+    }
+  });
+  
 module.exports = router;

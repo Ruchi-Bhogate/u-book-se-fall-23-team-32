@@ -13,7 +13,7 @@ function Forgot() {
       const response = await axios.post('http://localhost:8080/Forgot', {
         email
       });
-      //console.log(response.data);
+      console.log(response.data);
     } catch (error) {
       console.error('Not a valid email or username:', error);
     }
