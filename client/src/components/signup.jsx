@@ -73,14 +73,14 @@ function Signup() {
         <input
           //value={password}
           onChange={(e) => SetPassword(e.target.value)}
-          type = "text"
+          type = "password"
           placeholder = "Password"
         /> 
         <br />
          <input
           //value={password}
           onChange={(e) => SetConfirmPassword(e.target.value)}
-          type = "text"
+          type = "password"
           placeholder = "confirm Password"
         /> 
         <br />
