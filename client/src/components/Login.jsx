@@ -3,8 +3,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../styles/Login.css';
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
   const [emailOrUsername, setEmailOrUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -16,6 +18,8 @@ function Login() {
         password,
       });
       console.log(response.data);
+      if(response.data == 'Logged in successfully'){
+      navigate("/home");}
     } catch (error) {
       console.error('Error logging in:', error.response.data);
     }

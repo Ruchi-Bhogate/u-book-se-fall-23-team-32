@@ -6,7 +6,6 @@ import axios from 'axios';
 function Forgot() {
 
   const [email, setEmail] = useState('');
-
   const sendEmail = async (e) => {
     e.preventDefault();
     try {
@@ -28,6 +27,7 @@ function Forgot() {
         </div>
         <button type="submit">Send</button>
       </form>
+      
     </div>
   );
 }
