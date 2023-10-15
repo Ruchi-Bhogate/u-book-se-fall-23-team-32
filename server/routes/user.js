@@ -59,8 +59,8 @@ router.post('/signup', async (req, res) => {
       return res.status(400).json({ message: "No account with this email found." });
   }
   const token = generateToken();
-  console.log("generate Token", token);
-console.log("user",user);
+  //console.log("generate Token", token);
+//console.log("user",user);
     // Save the token in the database
     const resetToken = new ResetToken({
         userId: user.username,
@@ -82,6 +82,7 @@ console.log("user",user);
         html: `<p>Hi, This email is being sent in response to a password reset request. Please click <a href ='http://localhost:3000/Reset?token=${token}/'>here</a> to reset your password.</p>`
     }
     const check = await mailTransport.sendMail(details);
+    res.send({message: 'ok'});
     console.log =("Status ",check.status);
 });
 
