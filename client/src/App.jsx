@@ -8,7 +8,7 @@ import Landing from './components/Landing';
 import Home from './components/Home';
 import Forgot from './components/Forgot';
 import Reset from './components/Reset';
-
+import Userview from './components/userview';
 function App() {
   return (
     <Router>
@@ -19,7 +19,7 @@ function App() {
           <Route path="/home" element={<Home/>} />\
           <Route path="/forgot" element={<Forgot/>}/>
           <Route path="/reset" element={<Reset/>}/>
-      
+          <Route path="/userview" element={<Userview/>}/>
         </Routes>
     </Router>
   );

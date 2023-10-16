@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user_model');
+//const profile  = require('../models/Profile');
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 const ResetToken = require('../models/reset_token');
-const generateToken = require('../helper/generate_token')
+const generateToken = require('../helper/generate_token');
 
 
 router.post('/login', async (req, res) => {
@@ -22,6 +23,15 @@ router.post('/login', async (req, res) => {
     if (!validPassword) return res.status(400).send('Invalid password');
 
     res.send('Logged in successfully');
+    
+    const profileToken = jwt.sign({user:user.username});
+    /*const token = generateToken();
+    const profileTokenToken = new ResetToken({
+      userId: user.username,
+      token: token
+  });*/
+  //await profileToken.save();
+  res.json({profileToken});
   } catch (error) {
     res.status(500).send(error.message);
   }
@@ -110,5 +120,11 @@ router.post('/signup', async (req, res) => {
       res.status(500).send(error.message)
     }
   });
-  
+  //gets personal user profile by token
+  /*router.post('/profile/:token', (req,res) => {
+    const {token} = req.params
+    const resetToken = await ResetToken.findOne({ token });
+    const user = await User.findOne({username:resetToken.userId});
+    res.send(user.firstname,user.lastname);
+  })*/
 module.exports = router;

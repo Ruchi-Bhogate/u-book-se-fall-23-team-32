@@ -16,10 +16,14 @@ function Login() {
       const response = await axios.post('http://localhost:8080/login', {
         emailOrUsername,
         password,
+        JSON
       });
       console.log(response.data);
       if(response.data == 'Logged in successfully'){
-      navigate("/home");}
+      //navigate("/home");
+      const token = response.JSON;
+      navigate("/userview",{token});
+      }
     } catch (error) {
       console.error('Error logging in:', error.response.data);
     }
