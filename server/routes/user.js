@@ -54,6 +54,10 @@ router.post('/signup', async (req, res) => {
         email: req.body.email,
         username: username,
         password: hashedPassword,
+        securityQuestion1 : req.body.securityQuestion1,
+        securityAnswer1 : req.body.securityAnswer1,
+        securityQuestion2 : req.body.securityQuestion2,
+        securityAnswer2: req.body.securityAnswer2
       })
       res.send({message :'ok'})
     } catch (error) {
@@ -96,6 +100,45 @@ router.post('/signup', async (req, res) => {
     console.log =("Status ",check.status);
 });
 
+router.post('/get-security-questions', async (req,res) => {
+  const email = req.body.email
+  try{
+  const user = await User.findOne({ email });
+  if (!user) {
+    return res.status(400).json({ message: "No account with this email found." });
+}
+const questions = {
+  question1: user.securityQuestion1,
+  question2: user.securityQuestion2
+  };
+  console.log(questions)
+res.json(questions);
+  } catch(err){
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+router.post('/verify-answers', async (req, res) => {
+  const { email, answers } = req.body;
+  const user = await User.findOne({ email });
+  const verifiedAnswers = [user.securityAnswer1, user.securityAnswer2]
+  console.log(user)
+  console.log(email,answers)
+  if (!user || JSON.stringify(verifiedAnswers) !== JSON.stringify(answers)) {
+      return res.status(400).json({ message: 'Answer is incorrect or email not found' });
+  }
+  const token = generateToken();
+ 
+    const resetToken = new ResetToken({
+        userId: user.username,
+        token: token
+    });
+    await resetToken.save();
+  return res.status(200).json({resetToken: resetToken})
+});
+
+
   router.post('/reset/:token', async (req, res) => {
     const {token} = req.params
     const resetToken = await ResetToken.findOne({ token });
@@ -113,7 +156,7 @@ router.post('/signup', async (req, res) => {
      //console.log(user);
     user.password = hashedPassword;
     await user.save();
-    await resetToken.delete();
+    await ResetToken.deleteOne({ token });
       res.send('Password was changed');
     }
     catch (error) {
