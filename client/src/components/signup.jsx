@@ -11,6 +11,20 @@ function Signup() {
   const [confirmpassword, SetConfirmPassword] = useState('')
   const [role, SetRole] = useState('')
   const [signUpResponseMsg, setSignUpResponseMsg] = useState('')
+  const [securityQuestion1, setSecurityQuestion1] = useState('');
+  const [securityAnswer1, setSecurityAnswer1] = useState('');
+  const [securityQuestion2, setSecurityQuestion2] = useState('');
+  const [securityAnswer2, setSecurityAnswer2] = useState('');
+  const SECURITY_QUESTIONS1 = [
+    'What was the name of your first pet?',
+    'What was your childhood nickname?',
+    'In what city you were born?',
+];
+const SECURITY_QUESTIONS2 = [
+  'what is your mothers maiden name?',
+  'What high school did you attend?',
+  'What was your favorite food as a child?',
+];
   
   async function Register(event) {
     event.preventDefault()
@@ -25,7 +39,11 @@ function Signup() {
           email,
           password,
           confirmpassword,
-          role
+          role,
+          securityQuestion1,
+          securityAnswer1,
+          securityQuestion2,
+          securityAnswer2
         }),
     })
     const data = await response.json()
@@ -84,7 +102,40 @@ function Signup() {
           placeholder = "confirm Password"
         /> 
         <br />
+        <select name="securityQuestion1" value={securityQuestion1} onChange={(e) => setSecurityQuestion1(e.target.value)}>
+        <option value="" disabled selected>select security Question1</option>
+          {SECURITY_QUESTIONS1.map((question, index) => (
+        <option key={index} value={question}>
+            {question}
+        </option>
+        ))}
+        </select>
+        <br />
+        <input 
+        type="text" 
+        name="securityAnswer1" 
+        placeholder="Ans for security question1" 
+        onChange={(e) => setSecurityAnswer1(e.target.value)}
+        />
+        <br />
+        <select name="securityQuestion2" value={securityQuestion2} onChange={(e) => setSecurityQuestion2(e.target.value)}>
+        <option value="" disabled selected>select security Question2</option>
+          {SECURITY_QUESTIONS2.map((question, index) => (
+        <option key={index} value={question}>
+            {question}
+        </option>
+        ))}
+        </select>
+        <br />
+        <input 
+        type="text" 
+        name="securityAnswer2" 
+        placeholder="Ans for security question2" 
+        onChange={(e) => setSecurityAnswer2(e.target.value)}
+        />
+        <br />
         <input type = "Submit" value = "Register"/>
+
         <p>{signUpResponseMsg}</p>
       </form>
     </div>
