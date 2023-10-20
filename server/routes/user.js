@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 const ResetToken = require('../models/reset_token');
 const generateToken = require('../helper/generate_token');
-
+const jsontoken = require('jsonwebtoken');
 
 router.post('/login', async (req, res) => {
   try {
@@ -22,16 +22,14 @@ router.post('/login', async (req, res) => {
     const validPassword = await bcrypt.compare(req.body.password, user.password);
     if (!validPassword) return res.status(400).send('Invalid password');
 
-    res.send('Logged in successfully');
-    
-    const profileToken = jwt.sign({user:user.username});
-    /*const token = generateToken();
-    const profileTokenToken = new ResetToken({
-      userId: user.username,
-      token: token
-  });*/
-  //await profileToken.save();
-  res.json({profileToken});
+    //res.send('Logged in successfully');
+    //making jwt token and sending back to client 
+    let jwtSecretKey = process.env.JwtSecretKey
+    let const data = {
+      username: user.body?.username,
+    }
+    const token = jwt.sign(data,jwtSecretKey);
+    res.status(200).json(token);
   } catch (error) {
     res.status(500).send(error.message);
   }
