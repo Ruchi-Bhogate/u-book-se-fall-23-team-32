@@ -2,11 +2,12 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 const User = require('../models/user_model');
+//const profile  = require('../models/Profile');
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 const ResetToken = require('../models/reset_token');
-const generateToken = require('../helper/generate_token')
-
+const generateToken = require('../helper/generate_token');
+const jsontoken = require('jsonwebtoken');
 
 router.post('/login', async (req, res) => {
   try {
@@ -161,7 +162,13 @@ router.post('/verify-answers', async (req, res) => {
       res.status(500).send(error.message)
     }
   });
-  
+  //gets personal user profile by token
+  /*router.post('/profile/:token', (req,res) => {
+    const {token} = req.params
+    const resetToken = await ResetToken.findOne({ token });
+    const user = await User.findOne({username:resetToken.userId});
+    res.send(user.firstname,user.lastname);
+  })*/
 module.exports = router;
 
 router.get('/home', async (req, res) => {
@@ -182,6 +189,29 @@ router.get('/home', async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
+    // Send user data
+    res.json(user);
+  } catch (err) {
+    res.status(401).json({ message: 'Token is not valid' });
+  }
+});
+
+router.get('/user', async (req, res) => {
+  const token = req.header('x-auth-token');
+  if (!token) {
+    return res.status(401).json({ message: 'No token, authorization denied' });
+  }
+
+  try {
+    // Verify token
+    const decoded = jwt.verify(token, 'mysecretkey170904');
+    //console.log(decoded)
+    // Find user by ID
+    const user = await User.findById(decoded.userId);
+    console.log(user)
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
     // Send user data
     res.json(user);
   } catch (err) {

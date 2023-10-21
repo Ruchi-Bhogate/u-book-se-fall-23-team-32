@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
 function Signup() {
@@ -49,7 +49,7 @@ const SECURITY_QUESTIONS2 = [
     const data = await response.json()
     console.log(data)
     setSignUpResponseMsg(data.message)
-    if(signUpResponseMsg === "ok") {
+    if(data.message === "ok") {
       navigate("/login")
     }
 

@@ -7,6 +7,7 @@ function Landing() {
     <div >
       <h1>Landing Page!</h1> 
       <p> <a href="/Login">Login</a></p>
+      <p> <a href = "/signup">Signup</a></p>
     </div>
   );
 }

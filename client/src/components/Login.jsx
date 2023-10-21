@@ -16,6 +16,7 @@ function Login() {
       const response = await axios.post('http://localhost:8080/login', {
         emailOrUsername,
         password,
+        JSON
       });
       console.log(response.data);
       if (response.data.token) {
