@@ -36,7 +36,7 @@ function Home() {
     <div>
       <h1>Welcome, {user.username}!</h1>
       {/* Display other user data here */}
-      <p><a href = "/Userview">Profile Page</a></p>
+            <p><a href = "/Userview">Profile Page</a></p>
 
     </div>
   );
