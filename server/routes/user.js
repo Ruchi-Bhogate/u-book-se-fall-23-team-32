@@ -195,3 +195,26 @@ router.get('/home', async (req, res) => {
     res.status(401).json({ message: 'Token is not valid' });
   }
 });
+
+router.get('/user', async (req, res) => {
+  const token = req.header('x-auth-token');
+  if (!token) {
+    return res.status(401).json({ message: 'No token, authorization denied' });
+  }
+
+  try {
+    // Verify token
+    const decoded = jwt.verify(token, 'mysecretkey170904');
+    //console.log(decoded)
+    // Find user by ID
+    const user = await User.findById(decoded.userId);
+    console.log(user)
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    // Send user data
+    res.json(user);
+  } catch (err) {
+    res.status(401).json({ message: 'Token is not valid' });
+  }
+});

@@ -8,7 +8,7 @@ import Landing from './components/Landing';
 import Home from './components/Home';
 import Forgot from './components/Forgot';
 import Reset from './components/Reset';
-import Userview from './components/userview';
+import Userview from './components/Userview';
 function App() {
   return (
     <Router>

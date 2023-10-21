@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
-function Home() {
-  const [user, setUser] = useState(null);
+function Userview() {
 
+  const [user, setUser] = useState('');
+  //gets user and calls server function to pull data  
   useEffect(() => {
     const fetchUserData = async () => {
       const token = localStorage.getItem('token');
@@ -13,7 +16,7 @@ function Home() {
       }
 
       try {
-        const response = await axios.get('http://localhost:8080/home', {
+        const response = await axios.get('http://localhost:8080/user', {
           headers: {
             'x-auth-token': token,
           },
@@ -32,15 +35,16 @@ function Home() {
     return <div>Loading...</div>;
   }
 
-  return (
-    <div>
-      <h1>Welcome, {user.username}!</h1>
-      {/* Display other user data here */}
-      <p><a href = "/Userview">Profile Page</a></p>
-
+  
+    return (
+    <div >
+      <h1>User Profile</h1> 
+      <p>Username: {user.username}</p>
+      <p>First Name: {user.firstname}</p>
+      <p>Last Name: {user.lastname}</p>
+      <p>Email: {user.email}</p>
     </div>
   );
 }
 
-export default Home;
-
+export default Userview;
