@@ -19,10 +19,12 @@ function Login() {
         JSON
       });
       console.log(response.data);
-      if(response.data == 'Logged in successfully'){
-      //navigate("/home");
-      const token = response.JSON;
-      navigate("/userview",{token});
+      if (response.data.token) {
+        // Save token in local storage
+        localStorage.setItem('token', response.data.token);
+
+        // Navigate to home page
+        navigate("/home");
       }
     } catch (error) {
       console.error('Error logging in:', error.response.data);

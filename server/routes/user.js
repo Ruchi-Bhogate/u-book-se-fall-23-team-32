@@ -1,4 +1,5 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const router = express.Router();
 const User = require('../models/user_model');
 //const profile  = require('../models/Profile');
@@ -22,14 +23,14 @@ router.post('/login', async (req, res) => {
     const validPassword = await bcrypt.compare(req.body.password, user.password);
     if (!validPassword) return res.status(400).send('Invalid password');
 
-    //res.send('Logged in successfully');
-    //making jwt token and sending back to client 
-    let jwtSecretKey = process.env.JwtSecretKey
-    let const data = {
-      username: user.body?.username,
-    }
-    const token = jwt.sign(data,jwtSecretKey);
-    res.status(200).json(token);
+    const token = jwt.sign(
+      { userId: user._id },
+      'mysecretkey170904',  
+      { expiresIn: '1h' }  
+    );
+
+    // Send token to frontend
+    res.json({ token });
   } catch (error) {
     res.status(500).send(error.message);
   }
@@ -169,3 +170,28 @@ router.post('/verify-answers', async (req, res) => {
     res.send(user.firstname,user.lastname);
   })*/
 module.exports = router;
+
+router.get('/home', async (req, res) => {
+  const token = req.header('x-auth-token');
+//console.log(token)
+  if (!token) {
+    return res.status(401).json({ message: 'No token, authorization denied' });
+  }
+
+  try {
+    // Verify token
+    const decoded = jwt.verify(token, 'mysecretkey170904');
+    //console.log(decoded)
+    // Find user by ID
+    const user = await User.findById(decoded.userId).select('-password'); // Exclude password from user data
+    console.log(user)
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Send user data
+    res.json(user);
+  } catch (err) {
+    res.status(401).json({ message: 'Token is not valid' });
+  }
+});
