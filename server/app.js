@@ -34,7 +34,8 @@ app.use('/auth', authRoutes);
 
 
 //ports
-const port  = process.env.PORT || 8080;
+//const port  = process.env.PORT || 8080;
+const port = 8080;
 
 // listener
 const server = app.listen(port, () =>
