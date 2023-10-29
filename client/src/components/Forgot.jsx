@@ -36,7 +36,7 @@ function Forgot() {
     e.preventDefault();
     try {
       const test = await axios.post()
-      const response = await axios.post('http://localhost:8080/verify-answers', {
+      const response = await axios.post('https://ubook.onrender.com/verify-answers', {
         email, answers
       });
       console.log(response.data);
