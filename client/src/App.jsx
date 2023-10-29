@@ -8,6 +8,7 @@ import Landing from './components/Landing';
 import Home from './components/Home';
 import Forgot from './components/Forgot';
 import Reset from './components/Reset';
+import AuthCallback from './components/AuthCallBack';
 import Userview from './components/Userview';
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/home" element={<Home/>} />\
           <Route path="/forgot" element={<Forgot/>}/>
           <Route path="/reset" element={<Reset/>}/>
+          <Route path="/authcallback" element={<AuthCallback/>}/>
           <Route path="/userview" element={<Userview/>}/>
         </Routes>
     </Router>

@@ -44,7 +44,7 @@ function Login() {
         </div>
         <button type="submit">Login</button>
       </form>
-      <p>Don't have an account? <a href="/signup">Sign up</a></p>
+      <p>Don't have an account? <a href="/signup" >Sign up</a></p>
       <a href="http://localhost:8080/auth/google">Login with Google</a>
       <div>
        <a href="/forgot">forgot password</a>

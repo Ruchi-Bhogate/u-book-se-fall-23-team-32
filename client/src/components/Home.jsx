@@ -3,7 +3,7 @@ import axios from 'axios';
 
 function Home() {
   const [user, setUser] = useState(null);
-
+  
   useEffect(() => {
     const fetchUserData = async () => {
       const token = localStorage.getItem('token');
@@ -34,7 +34,7 @@ function Home() {
 
   return (
     <div>
-      <h1>Welcome, {user.username}!</h1>
+      <h1>Welcome, {user.email}!</h1>
       {/* Display other user data here */}
       <p><a href = "/Userview">Profile Page</a></p>
 

@@ -56,6 +56,7 @@ router.post('/signup', async (req, res) => {
         securityQuestion1 : req.body.securityQuestion1,
         securityAnswer1 : req.body.securityAnswer1,
         securityQuestion2 : req.body.securityQuestion2,
+        googleId: "-",
         securityAnswer2: req.body.securityAnswer2
       })
       res.send({message :'ok'})
