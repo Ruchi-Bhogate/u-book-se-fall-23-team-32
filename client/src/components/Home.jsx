@@ -13,7 +13,7 @@ function Home() {
       }
 
       try {
-        const response = await axios.get('http://localhost:8080/home', {
+        const response = await axios.get('https://ubook.onrender.com/home', {
           headers: {
             'x-auth-token': token,
           },

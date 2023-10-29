@@ -13,7 +13,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/login', {
+      const response = await axios.post('https://ubook.onrender.com/login', {
         emailOrUsername,
         password,
         JSON
@@ -45,7 +45,7 @@ function Login() {
         <button type="submit">Login</button>
       </form>
       <p>Don't have an account? <a href="/signup">Sign up</a></p>
-      <a href="http://localhost:8080/auth/google">Login with Google</a>
+      <a href="https://ubook.onrender.com/auth/google">Login with Google</a>
       <div>
        <a href="/forgot">forgot password</a>
       </div>

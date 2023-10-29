@@ -28,7 +28,7 @@ const SECURITY_QUESTIONS2 = [
   
   async function Register(event) {
     event.preventDefault()
-    const response = await fetch('http://localhost:8080/signup', {
+    const response = await fetch('https://ubook.onrender.com/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

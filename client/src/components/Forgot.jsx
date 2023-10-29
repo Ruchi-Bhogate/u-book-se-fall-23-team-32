@@ -51,7 +51,7 @@ function Forgot() {
   const handleEmailSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/Forgot', { email });
+      const response = await axios.post('https://ubook.onrender.com/Forgot', { email });
       console.log(response.data);
     } catch (error) {
       console.error('Not a valid email or username:', error);

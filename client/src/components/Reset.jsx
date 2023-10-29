@@ -14,7 +14,7 @@ function Reset() {
   const doReset = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:8080/reset/${x}`, {
+      const response = await axios.post(`https://ubook.onrender.com/reset/${x}`, {
         password,
         confirmpassword
       });
