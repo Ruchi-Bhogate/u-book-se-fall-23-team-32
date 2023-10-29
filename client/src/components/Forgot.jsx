@@ -12,7 +12,9 @@ function Forgot() {
 
   const fetchSecurityQuestions = async () => {
     try {
-      const response = await axios.post('http://localhost:8080/get-security-questions', { email });
+      console.log(process.env.REACT_APP_Backend_URL);
+      const response = await axios.post('https://ubook.onrender.com/get-security-questions', { email });
+      //const response = await axios.post('http://localhost:8080/get-security-questions', { email });
       //console.log('Backend response:', response.data);
       const questionsObject = response.data;
       //console.log('Backend response:',questionsObject);
@@ -33,6 +35,7 @@ function Forgot() {
   const handleAnswerSubmit = async (e) => {
     e.preventDefault();
     try {
+      const test = await axios.post()
       const response = await axios.post('http://localhost:8080/verify-answers', {
         email, answers
       });
