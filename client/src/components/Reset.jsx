@@ -9,7 +9,6 @@ function Reset() {
   
   const [password, setPassword] = useState('');
   const [confirmpassword, setConfirmPassword] = useState('');
-  console.log()
   const [searchParams, setSearchParams] = useSearchParams();
   const x = searchParams.get("token")
   const doReset = async (e) => {

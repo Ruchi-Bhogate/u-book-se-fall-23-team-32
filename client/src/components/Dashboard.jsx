@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import '../styles/Dashboard.css';
+import Header from './Header';
+import Footer from './Footer';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -26,6 +28,8 @@ class Dashboard extends Component {
     const { postedBooks, rentedBooks, earnings } = this.state;
 
     return (
+      <div>
+      <Header />
       <div className="dashboard-container">
         <div className="summary-section">
           <h2>Summary</h2>
@@ -51,6 +55,8 @@ class Dashboard extends Component {
           <h2>Earnings</h2>
           <p>Total Earnings: ${earnings}</p>
         </div>
+      </div>
+      <Footer />
       </div>
     );
   }
