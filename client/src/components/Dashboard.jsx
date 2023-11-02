@@ -1,34 +1,27 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import '../styles/Dashboard.css';
 import Header from './Header';
 import Footer from './Footer';
 
-class Dashboard extends Component {
-  constructor(props) {
-    super(props);
+function Dashboard() {
+  const navigate = useNavigate();
+  const [postedBooks, setPostedBooks] = useState([]);
+  const [rentedBooks, setRentedBooks] = useState([]);
+  const [earnings, setEarnings] = useState(0);
 
-    this.state = {
-      postedBooks: [],
-      rentedBooks: [],
-      earnings: 0,
-    };
-  }
-
-  componentDidMount() {
+  useEffect(() => {
     // Fetch posted books, rented books, and earnings data from the server
     // and update the corresponding state variables.
-  }
+  }, []);
 
-  handlePostNewBook = () => {
-    // Handle post new book logic
+  const handlePostNewBook = () => {
+    navigate('/PostBook');
   };
 
-  render() {
-    const { postedBooks, rentedBooks, earnings } = this.state;
-
-    return (
-      <div>
+  return (
+    <div>
       <Header />
       <div className="dashboard-container">
         <div className="summary-section">
@@ -37,7 +30,7 @@ class Dashboard extends Component {
           <p>Rented Books: {rentedBooks.length}</p>
         </div>
         <div className="post-new-book-button">
-          <button onClick={this.handlePostNewBook}>Post New Book</button>
+          <button onClick={handlePostNewBook}>Post New Book</button>
         </div>
         <div className="rented-books-list">
           <h2>Rented Books</h2>
@@ -57,9 +50,8 @@ class Dashboard extends Component {
         </div>
       </div>
       <Footer />
-      </div>
-    );
-  }
+    </div>
+  );
 }
 
 export default Dashboard;

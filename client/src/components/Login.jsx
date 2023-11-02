@@ -21,7 +21,7 @@ function Login() {
         localStorage.setItem('token', response.data.token);
 
         // Navigate to home page
-        navigate('/home');
+        navigate('/Dashboard');
       }
     } catch (error) {
       console.error('Error logging in:', error.response.data);

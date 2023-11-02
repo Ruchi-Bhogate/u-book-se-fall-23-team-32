@@ -8,7 +8,7 @@ function Header() {
       <div className="logo">Logo</div>
       <nav>
         <ul className="nav-links">
-          <li><Link to="/home">Home</Link></li>
+          <li><Link to="/dashboard">Home</Link></li>
           <li><Link to="/browse-books">Browse Books</Link></li>
           <li><Link to="/my-books">My Books</Link></li>
           <li><Link to="/profile">Profile</Link></li>

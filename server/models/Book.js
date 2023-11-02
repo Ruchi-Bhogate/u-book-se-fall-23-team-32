@@ -1,5 +1,16 @@
 const mongoose = require('mongoose');
 
+const locationSchema = new mongoose.Schema({
+  lat: {
+    type: Number,
+    required: true,
+  },
+  lng: {
+    type: Number,
+    required: true,
+  },
+});
+
 const bookSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -17,22 +28,29 @@ const bookSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  publicationYear: {
+  publication_year: {
     type: Number,
-    required: true,
   },
   condition: {
     type: String,
     required: true,
   },
-  pricePerDay: {
+  price_per_day: {
     type: Number,
     required: true,
   },
-  ownerUserId: {
+  owner_user_id: {
     type: mongoose.Schema.Types.ObjectId,
-    required: true,
     ref: 'User',
+    required: true,
+  },
+  location: {
+    type: locationSchema,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
   },
 });
 

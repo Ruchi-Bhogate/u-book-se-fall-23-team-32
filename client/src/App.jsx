@@ -11,6 +11,8 @@ import Reset from './components/Reset';
 import AuthCallback from './components/AuthCallBack';
 import Userview from './components/Userview';
 import Dashboard from './components/Dashboard';
+import PostBook from './components/PostBook';
+
 function App() {
   return (
     <Router>
@@ -24,6 +26,7 @@ function App() {
           <Route path="/authcallback" element={<AuthCallback/>}/>
           <Route path="/userview" element={<Userview/>}/>
           <Route path="/dashboard" element={<Dashboard/>}/>
+          <Route path="/postbook" element={<PostBook/>}/>
         </Routes>
     </Router>
   );
