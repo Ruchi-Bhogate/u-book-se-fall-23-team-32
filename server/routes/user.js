@@ -152,7 +152,7 @@ router.post('/verify-answers', async (req, res) => {
     try{
      // User.findByIdAndUpdate({_id:id},{password})
      const user = await User.findOne({username:resetToken.userId});
-     //console.log(user);
+     console.log(user);
     user.password = hashedPassword;
     await user.save();
     await ResetToken.deleteOne({ token });

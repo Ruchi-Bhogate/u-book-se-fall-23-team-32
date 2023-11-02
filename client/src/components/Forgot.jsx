@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import '../styles/Forgot.css';
 
 function Forgot() {
   const navigate = useNavigate();
@@ -56,44 +57,67 @@ function Forgot() {
   };
 
   return (
-    <div>
-      <form onSubmit={method === 'email' ? handleEmailSubmit : handleAnswerSubmit}>
+    <div className="forgot-container">
+      <form onSubmit={method === 'email' ? handleEmailSubmit : handleAnswerSubmit} className="forgot-form">
         {method === 'email' && (
-          <div>
-            <label>Password Recovery:</label>
-            <input type="email" placeholder="Please type your email here" onChange={(e) => setEmail(e.target.value)} />
+          <div className="input-group">
+            <label className="label">Password Recovery:</label>
+            <input
+              type="email"
+              placeholder="Please type your email here"
+              onChange={(e) => setEmail(e.target.value)}
+              className="input-field"
+            />
           </div>
         )}
         
         {securityQuestions && method === 'question' && (
-          <div>
-            <label>Email:</label>
-            <input type="email" placeholder="Enter email to get security questions" onChange={(e) => setEmail(e.target.value)} />
+          <div className="input-group">
+            <label className="label">Email:</label>
+            <input
+              type="email"
+              placeholder="Enter email to get security questions"
+              onChange={(e) => setEmail(e.target.value)}
+              className="input-field"
+            />
             {!fetchingQuestions ? (
-              <button type="button" onClick={() => { setFetchingQuestions(true); fetchSecurityQuestions(); }}>Fetch Questions</button>
+              <button
+                type="button"
+                onClick={() => { setFetchingQuestions(true); fetchSecurityQuestions(); }}
+                className="button"
+              >
+                Fetch Questions
+              </button>
             ) : (
               securityQuestions.map((question, index) => (
-                <div key={index}>
-                  <label>{question}</label>
-                  <input type="text" placeholder="Your answer" onChange={(e) => {
-                    const newAnswers = [...answers];
-                    newAnswers[index] = e.target.value;
-                    setAnswers(newAnswers);
-                  }} />
+                <div key={index} className="question-group">
+                  <label className="label">{question}</label>
+                  <input
+                    type="text"
+                    placeholder="Your answer"
+                    onChange={(e) => {
+                      const newAnswers = [...answers];
+                      newAnswers[index] = e.target.value;
+                      setAnswers(newAnswers);
+                    }}
+                    className="input-field"
+                  />
                 </div>
               ))
             )}
           </div>
         )}
 
-        {method ? (
-          <button type="submit">{method === 'email' ? 'Send Email' : 'Submit Answers'}</button>
-        ) : (
-          <>
-            <button type="button" onClick={() => setMethod('email')}>Send Reset Link via Email</button>
-            <button type="button" onClick={() => setMethod('question')}>Answer Security Questions</button>
-          </>
-        )}
+        <div className="button-group">
+          {method ? (
+            <button type="submit" className="button">{method === 'email' ? 'Send Email' : 'Submit Answers'}</button>
+          ) : (
+            <>
+              <button type="button" onClick={() => setMethod('email')} className="button">Send Reset Link via Email</button>
+              <button type="button" onClick={() => setMethod('question')} className="button">Answer Security Questions</button>
+            </>
+          )}
+        </div>
       </form>
     </div>
   );

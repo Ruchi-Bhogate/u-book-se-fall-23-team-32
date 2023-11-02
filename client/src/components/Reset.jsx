@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import {useSearchParams } from 'react-router-dom';
+import '../styles/Reset.css';
 
 function Reset() {
   
@@ -25,14 +26,26 @@ function Reset() {
   };
 
   return (
-    <div >
-      <form onSubmit={doReset}>
-        <div>
-          <label>Make New Password:</label>
-          <input type="password" value={password} placeholder = "new password" onChange={(e) => setPassword(e.target.value)} />
-          <input type="password" value={confirmpassword} placeholder = "confirm password" onChange={(e) => setConfirmPassword(e.target.value)} />
+    <div className="reset-container">
+      <form onSubmit={doReset} className="reset-form">
+        <div className="input-group">
+          <label className="label">Make New Password:</label>
+          <input
+            type="password"
+            value={password}
+            placeholder="new password"
+            onChange={(e) => setPassword(e.target.value)}
+            className="input-field"
+          />
+          <input
+            type="password"
+            value={confirmpassword}
+            placeholder="confirm password"
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            className="input-field"
+          />
         </div>
-        <button type="submit">Change Password</button>
+        <button type="submit" className="button">Change Password</button>
       </form>
     </div>
   );
