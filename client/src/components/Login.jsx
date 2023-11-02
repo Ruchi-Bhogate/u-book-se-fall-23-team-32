@@ -1,9 +1,7 @@
-
-
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../styles/Login.css';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const navigate = useNavigate();
@@ -16,7 +14,6 @@ function Login() {
       const response = await axios.post('http://localhost:8080/login', {
         emailOrUsername,
         password,
-        JSON
       });
       console.log(response.data);
       if (response.data.token) {
@@ -24,7 +21,7 @@ function Login() {
         localStorage.setItem('token', response.data.token);
 
         // Navigate to home page
-        navigate("/home");
+        navigate('/home');
       }
     } catch (error) {
       console.error('Error logging in:', error.response.data);
@@ -32,22 +29,26 @@ function Login() {
   };
 
   return (
-    <div >
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email or Username:</label>
-          <input type="text" value={emailOrUsername} onChange={(e) => setEmailOrUsername(e.target.value)} />
+    <div className="login-container">
+      <form onSubmit={handleSubmit} className="login-form">
+        <div className="input-group">
+          <label className="input-label">Email or Username:</label>
+          <input type="text" value={emailOrUsername} onChange={(e) => setEmailOrUsername(e.target.value)} className="input-field" />
         </div>
-        <div>
-          <label>Password:</label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <div className="input-group">
+          <label className="input-label">Password:</label>
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="input-field" />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" className="submit-button">Login</button>
       </form>
-      <p>Don't have an account? <a href="/signup" >Sign up</a></p>
-      <a href="http://localhost:8080/auth/google">Login with Google</a>
-      <div>
-       <a href="/forgot">forgot password</a>
+      <div className="signup-link">
+        <p>Don't have an account? <a href="/signup">Sign up</a></p>
+      </div>
+      <div className="social-login">
+        <a href="http://localhost:8080/auth/google" className="google-login">Login with Google</a>
+      </div>
+      <div className="forgot-password">
+        <a href="/forgot">Forgot password?</a>
       </div>
     </div>
   );

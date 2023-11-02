@@ -7,7 +7,6 @@ const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 const ResetToken = require('../models/reset_token');
 const generateToken = require('../helper/generate_token');
-const jsontoken = require('jsonwebtoken');
 
 router.post('/login', async (req, res) => {
   try {

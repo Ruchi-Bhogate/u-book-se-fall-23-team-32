@@ -10,6 +10,7 @@ import Forgot from './components/Forgot';
 import Reset from './components/Reset';
 import AuthCallback from './components/AuthCallBack';
 import Userview from './components/Userview';
+import Dashboard from './components/Dashboard';
 function App() {
   return (
     <Router>
@@ -22,6 +23,7 @@ function App() {
           <Route path="/reset" element={<Reset/>}/>
           <Route path="/authcallback" element={<AuthCallback/>}/>
           <Route path="/userview" element={<Userview/>}/>
+          <Route path="/dashboard" element={<Dashboard/>}/>
         </Routes>
     </Router>
   );

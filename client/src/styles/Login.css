@@ -1,67 +1,79 @@
-
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    min-height: 100vh;
-    justify-content: center;
-    align-items: center;
-}
-
-/*div {
-    background-color: white;
+.login-container {
+    max-width: 400px;
+    margin: 0 auto;
     padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #e1e1e1;
     border-radius: 5px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    box-sizing: border-box;
-}*/
-
-label {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .input-group {
+    margin-bottom: 20px;
+  }
+  
+  .input-label {
     display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-}
-
-input[type="email"], input[type="password"] {
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .input-field {
     width: 100%;
     padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: 1px solid #e1e1e1;
+    border-radius: 5px;
     box-sizing: border-box;
-}
-
-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007BFF;
+  }
+  
+  .submit-button {
+    padding: 10px 15px;
+    background-color: #4caf50;
+    color: #ffffff;
     border: none;
-    border-radius: 4px;
-    color: white;
+    border-radius: 5px;
     cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.2s ease;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-p {
-    margin-top: 20px;
-    font-size: 0.9em;
-}
-
-a {
+  }
+  
+  .submit-button:hover {
+    background-color: #45a049;
+  }
+  
+  .signup-link p {
+    text-align: center;
+  }
+  
+  .social-login a {
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+    text-align: center;
+    background-color: #db4437;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
     text-decoration: none;
-    color: #007BFF;
-    transition: color 0.2s ease;
-}
-
-a:hover {
-    color: #0056b3;
-}
+  }
+  
+  .google-login:hover {
+    background-color: #c1351d;
+  }
+  
+  .forgot-password a {
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .forgot-password a:hover {
+    text-decoration: underline;
+  }
+  
