@@ -7,7 +7,6 @@ const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 const ResetToken = require('../models/reset_token');
 const generateToken = require('../helper/generate_token');
-const jsontoken = require('jsonwebtoken');
 
 router.post('/login', async (req, res) => {
   try {
@@ -56,6 +55,7 @@ router.post('/signup', async (req, res) => {
         securityQuestion1 : req.body.securityQuestion1,
         securityAnswer1 : req.body.securityAnswer1,
         securityQuestion2 : req.body.securityQuestion2,
+        googleId: "-",
         securityAnswer2: req.body.securityAnswer2
       })
       res.send({message :'ok'})
@@ -152,7 +152,7 @@ router.post('/verify-answers', async (req, res) => {
     try{
      // User.findByIdAndUpdate({_id:id},{password})
      const user = await User.findOne({username:resetToken.userId});
-     //console.log(user);
+     console.log(user);
     user.password = hashedPassword;
     await user.save();
     await ResetToken.deleteOne({ token });

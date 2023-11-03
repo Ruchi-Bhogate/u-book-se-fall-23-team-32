@@ -11,7 +11,7 @@ require("dotenv").config();
 const app = express();
 // Use session to keep track of login state
 
-app.use(require('express-session')({ secret: 'secretKey', resave: false, saveUninitialized: false }));
+app.use(require('express-session')({ secret: 'mysecretkey170904', resave: false, saveUninitialized: false }));
 app.use(passportSetup.initialize());
 app.use(passportSetup.session());
 
