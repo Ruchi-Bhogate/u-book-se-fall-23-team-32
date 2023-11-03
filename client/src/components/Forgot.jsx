@@ -13,7 +13,9 @@ function Forgot() {
 
   const fetchSecurityQuestions = async () => {
     try {
-      const response = await axios.post('http://localhost:8080/get-security-questions', { email });
+      console.log(process.env.REACT_APP_Backend_URL);
+      const response = await axios.post('https://ubook.onrender.com/get-security-questions', { email });
+      //const response = await axios.post('http://localhost:8080/get-security-questions', { email });
       //console.log('Backend response:', response.data);
       const questionsObject = response.data;
       //console.log('Backend response:',questionsObject);
@@ -34,7 +36,7 @@ function Forgot() {
   const handleAnswerSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/verify-answers', {
+      const response = await axios.post('https://ubook.onrender.com/verify-answers', {
         email, answers
       });
       console.log(response.data);
@@ -49,7 +51,7 @@ function Forgot() {
   const handleEmailSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/Forgot', { email });
+      const response = await axios.post('https://ubook.onrender.com/Forgot', { email });
       console.log(response.data);
     } catch (error) {
       console.error('Not a valid email or username:', error);

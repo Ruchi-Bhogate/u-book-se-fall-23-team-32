@@ -23,7 +23,11 @@ mongoose.connect(process.env.MONGO_URI,{
 //middleware
 app.use(morgan("dev"));
 app.use(express.json())
-app.use(cors());
+app.use(
+  cors({
+    origin:["http://localhost:3000", "https://ubookfront.onrender.com"],
+  })
+);
 // app.post('/api/register',(req,res)=> {
 //     console.log(req.body)
 //     res.json({status: 'ok'})  
@@ -34,7 +38,8 @@ app.use('/auth', authRoutes);
 
 
 //ports
-const port  = process.env.PORT || 8080;
+//const port  = process.env.PORT || 8080;
+const port = 8080;
 
 // listener
 const server = app.listen(port, () =>

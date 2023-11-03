@@ -32,23 +32,25 @@ function Signup() {
 
   async function Register(event) {
     event.preventDefault()
-    const response = await fetch('http://localhost:8080/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        firstname,
-        lastname,
-        email,
-        password,
-        confirmpassword,
-        role,
-        securityQuestion1,
-        securityAnswer1,
-        securityQuestion2,
-        securityAnswer2
-      }),
+
+    const response = await fetch('https://ubook.onrender.com/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          firstname,
+          lastname,
+          email,
+          password,
+          confirmpassword,
+          role,
+          securityQuestion1,
+          securityAnswer1,
+          securityQuestion2,
+          securityAnswer2
+        }),
+
     })
     const data = await response.json()
     console.log(data)

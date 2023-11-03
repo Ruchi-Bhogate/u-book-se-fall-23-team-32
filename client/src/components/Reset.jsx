@@ -4,9 +4,11 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import {useSearchParams } from 'react-router-dom';
 import '../styles/Reset.css';
+import { useNavigate } from "react-router-dom";
+
 
 function Reset() {
-  
+  const navigate = useNavigate();
   const [password, setPassword] = useState('');
   const [confirmpassword, setConfirmPassword] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
@@ -14,11 +16,12 @@ function Reset() {
   const doReset = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:8080/reset/${x}`, {
+      const response = await axios.post(`https://ubook.onrender.com/reset/${x}`, {
         password,
         confirmpassword
       });
       console.log(response.data);
+      navigate("/login")
     } catch (error) {
       console.error('Error with new password', error.response.data);
     }
