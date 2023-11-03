@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import {useSearchParams } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+
 
 function Reset() {
   
