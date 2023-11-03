@@ -21,7 +21,7 @@ function Reset() {
         confirmpassword
       });
       console.log(response.data);
-      navigate('/login')
+      navigate("/login")
     } catch (error) {
       console.error('Error with new password', error.response.data);
     }
