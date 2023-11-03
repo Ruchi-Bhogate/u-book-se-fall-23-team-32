@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 
 function Reset() {
-  
+  const navigate = useNavigate();
   const [password, setPassword] = useState('');
   const [confirmpassword, setConfirmPassword] = useState('');
   console.log()
