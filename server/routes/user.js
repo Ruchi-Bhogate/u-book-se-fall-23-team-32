@@ -92,7 +92,7 @@ router.post('/signup', async (req, res) => {
         to:email,
         subject:"Password Reset",
         //text:'http://localhost:3000/Reset/${user._id}'
-        html: `<p>Hi, This email is being sent in response to a password reset request. Please click <a href ='http://localhost:3000/Reset?token=${token}/'>here</a> to reset your password.</p>`
+        html: `<p>Hi, This email is being sent in response to a password reset request. Please click <a href ='https://ubookfront.onrender.com/Reset?token=${token}/'>here</a> to reset your password.</p>`
     }
     const check = await mailTransport.sendMail(details);
     res.send({message: 'ok'});
