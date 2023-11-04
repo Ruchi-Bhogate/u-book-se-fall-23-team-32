@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import '../styles/PostBook.css';
 import Header from './Header';
 import Footer from './Footer';
+//import { useRef } from 'react';
 
 const mapContainerStyle = {
   width: '100%',
@@ -11,8 +12,8 @@ const mapContainerStyle = {
 };
 
 const defaultCenter = {
-  lat: 51.505,
-  lng: -0.09,
+  lat: 39.168804,
+  lng: -86.536659,
 };
 
 function PostBook() {
@@ -24,21 +25,21 @@ function PostBook() {
     publication_year: '',
     condition: '',
     price_per_day: '',
+    image: null,
+    address: '',
     location: {
-      lat: 51.505,
-      lng: -0.09,
+      lat: { type: Number, required: true },
+      lng: { type: Number, required: true }
     },
     description: '',
   });
+  const imageRef = useRef();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setBookData({ ...bookData, [name]: value });
   };
 
-  const handleLocationChange = (latlng) => {
-    setBookData({ ...bookData, location: latlng });
-  };
 
   const onMapClick = (event) => {
     const lat = event.latLng.lat();
@@ -50,6 +51,11 @@ function PostBook() {
     }));
   }
 
+  const handleFileChange = (e) => {
+    setBookData({ ...bookData, image: e.target.files[0] });
+  };
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -59,6 +65,19 @@ function PostBook() {
       return;
     }
 
+    const formData = new FormData();
+  Object.keys(bookData).forEach(key => {
+    if (key !== 'image' && key!=='location') { // Exclude image key
+      formData.append(key, bookData[key]);
+    }
+  });
+
+  formData.append('location', JSON.stringify(bookData.location));
+
+  if (imageRef.current.files[0]) {
+    formData.append('image', imageRef.current.files[0]);
+  }
+
     try {
       const response = await axios.post('https://ubook.onrender.com/userview/postbook', bookData, {
         headers: {
@@ -67,6 +86,7 @@ function PostBook() {
       });
       console.log(response.data);
       alert('Book posted successfully');
+      window.location.reload();
     } catch (error) {
       console.error('Error posting book:', error.response.data);
       alert('Error posting book');
@@ -77,7 +97,7 @@ function PostBook() {
     <div>
      <Header />
     <div className="post-book-container">
-      <form onSubmit={handleSubmit} className="post-book-form">
+    <form onSubmit={handleSubmit} className="post-book-form" enctype="multipart/form-data">
         <div className="form-group">
           <label>Title:</label>
           <input type="text" name="title" value={bookData.title} onChange={handleChange} required />
@@ -92,7 +112,7 @@ function PostBook() {
         </div>
         <div className="form-group">
           <label>ISBN:</label>
-          <input type="text" name="ISBN" value={bookData.ISBN} onChange={handleChange} required />
+          <input type="text" name="ISBN" value={bookData.ISBN} onChange={handleChange} />
         </div>
         <div className="form-group">
           <label>Publication Year:</label>
@@ -100,7 +120,7 @@ function PostBook() {
         </div>
         <div className="form-group">
           <label>Condition:</label>
-          <input type="text" name="condition" value={bookData.condition} onChange={handleChange} required />
+          <input type="text" name="condition" value={bookData.condition} onChange={handleChange}  />
         </div>
         <div className="form-group">
           <label>Price Per Day:</label>
@@ -111,8 +131,16 @@ function PostBook() {
           <textarea name="description" value={bookData.description} onChange={handleChange} required />
         </div>
         <div className="form-group">
+        <label>Image:</label>
+        <input type="file" ref={imageRef} name="image" onChange={handleFileChange} />
+      </div>
+      <div className="form-group">
+        <label>Address:</label>
+        <input type="text" name="address" value={bookData.address} onChange={handleChange} required />
+      </div>
+        <div className="form-group">
           <label>Location:</label>
-          <LoadScript googleMapsApiKey={process.env.GOOGLE_API_KEY}>
+          <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_API_KEY}>
             <GoogleMap
               mapContainerStyle={mapContainerStyle}
               center={defaultCenter}
