@@ -31,7 +31,7 @@ app.use(cors());
 //routes
 app.use("/", require('./routes/user'));
 app.use('/auth', authRoutes);
-
+app.use("/userview", require('./routes/userview'));
 
 //ports
 const port  = process.env.PORT || 8080;
