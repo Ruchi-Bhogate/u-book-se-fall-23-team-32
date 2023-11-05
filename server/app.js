@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const passportSetup = require('./config/passport-setup');
 const authRoutes = require('./routes/auth');
+//const dotenv = require('dotenv');
 require("dotenv").config();
 
 //app
@@ -35,6 +36,8 @@ app.use(
 //routes
 app.use("/", require('./routes/user'));
 app.use('/auth', authRoutes);
+app.use("/userview", require('./routes/userview'));
+
 
 
 //ports
