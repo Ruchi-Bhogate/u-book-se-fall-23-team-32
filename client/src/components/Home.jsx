@@ -13,7 +13,7 @@ function Home() {
       }
 
       try {
-        const response = await axios.get('http://localhost:8080/home', {
+        const response = await axios.get('https://ubook.onrender.com/home', {
           headers: {
             'x-auth-token': token,
           },
@@ -36,7 +36,7 @@ function Home() {
     <div>
       <h1>Welcome, {user.email}!</h1>
       {/* Display other user data here */}
-      <p><a href = "/Userview">Profile Page</a></p>
+            <p><a href = "/Userview">Profile Page</a></p>
 
     </div>
   );
