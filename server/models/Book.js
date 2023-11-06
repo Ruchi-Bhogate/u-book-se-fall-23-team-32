@@ -52,6 +52,18 @@ const bookSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  image: {
+    type: String,
+    required: true,
+  },
+  address: {
+    type: String,
+    required: true,
+  },
+  postedAT: {
+    type: Date,
+    default: Date.now,
+},
 });
 
 const Book = mongoose.model('Book', bookSchema);
