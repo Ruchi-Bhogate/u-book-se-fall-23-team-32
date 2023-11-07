@@ -47,6 +47,7 @@ router.post('/postbook', verifyToken, upload.single('image'), async (req, res) =
           }
           
         const bookData = req.body;
+        console.error("no body",req.body);
         bookData.image = req.file.path;
         const authHeader = req.headers.authorization;
         const token = authHeader.split(' ')[1]; 
