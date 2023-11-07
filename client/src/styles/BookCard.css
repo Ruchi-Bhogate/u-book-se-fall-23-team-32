@@ -1,0 +1,56 @@
+.book-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    /* other styles */
+  }
+  
+  .book-image {
+    width: 100%; /* Set width to 100% of the parent */
+    height: 150px; /* Set a fixed height */
+    object-fit: cover; /* Ensure the image covers the area without stretching */
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .book-details {
+    padding: 5px 0;
+  }
+  
+  .book-date,
+  .book-price,
+  .book-title {
+    margin: 5px 0;
+  }
+  
+  /* Modal styles */
+  .book-modal {
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .book-modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    width: 50%;
+    position: relative;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 30px;
+    cursor: pointer;
+  }
+  
