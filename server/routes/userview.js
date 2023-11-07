@@ -34,7 +34,7 @@ const storage = multer.diskStorage({
     }
   });
   
-const upload = multer({ storage: storage });
+const upload = multer({ storage});
 
 router.post('/postbook', verifyToken, upload.single('image'), async (req, res) => {
     try {
