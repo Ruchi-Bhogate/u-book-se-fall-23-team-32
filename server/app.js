@@ -6,6 +6,8 @@ const cors = require('cors');
 const passportSetup = require('./config/passport-setup');
 const authRoutes = require('./routes/auth');
 //const dotenv = require('dotenv');
+const path = require('path');
+
 require("dotenv").config();
 
 //app
@@ -22,6 +24,7 @@ mongoose.connect(process.env.MONGO_URI,{
     useUnifiedTopology: true,
 }).then(() => console.log("DB CONNECTED")).catch(err => console.log("DB CONNECTION ERROR", err));
 //middleware
+app.use('/postedbooks', express.static(path.join(__dirname, 'postedbooks')));
 app.use(morgan("dev"));
 app.use(express.json())
 app.use(

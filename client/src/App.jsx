@@ -12,6 +12,7 @@ import AuthCallback from './components/AuthCallBack';
 import Userview from './components/Userview';
 import Dashboard from './components/Dashboard';
 import PostBook from './components/PostBook';
+import BrowseBooksPage from './components/BrowseBooks';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/userview" element={<Userview/>}/>
           <Route path="/dashboard" element={<Dashboard/>}/>
           <Route path="/postbook" element={<PostBook/>}/>
+          <Route path="/browsebooks" element={<BrowseBooksPage/>}/>
         </Routes>
     </Router>
   );
