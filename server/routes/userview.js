@@ -56,15 +56,15 @@ router.post('/postbook', verifyToken, upload.single('image'), async (req, res) =
         bookData.owner_user_id = user._id;
         console.log(bookData);
         const newBook = new Book(bookData);
-        //console.log()
+        //console.log('book no make',newBook);
         await newBook.save();
 
         res.json({ message: 'Book posted successfully' });
     } /*catch (error) {
         console.error('Error posting book:', error);
         res.status(500).json({ message: 'Error posting book' });
-    }
-}*/);
+    }*/
+});
 
 module.exports = router;
 
