@@ -8,6 +8,7 @@ const authRoutes = require('./routes/auth');
 //const dotenv = require('dotenv');
 const path = require('path');
 
+//const dotenv = require('dotenv');
 require("dotenv").config();
 
 //app
