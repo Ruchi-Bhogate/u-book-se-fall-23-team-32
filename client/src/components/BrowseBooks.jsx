@@ -9,7 +9,7 @@ function BrowseBooksPage() {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/userview/browsebooks');
+        const response = await axios.get('https://ubook.onrender.com/userview/browsebooks');
         setBooks(response.data);
       } catch (error) {
         console.error('Error fetching books:', error);

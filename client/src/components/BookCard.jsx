@@ -20,7 +20,7 @@ function BookCard({ book }) {
 
   return (
     <div className="book-card">
-      <img src={`http://localhost:8080/${book.image}`} alt="Book Cover" className="book-image" onClick={handleOpenModal} />
+      <img src={`https://ubook.onrender.com/${book.image}`} alt="Book Cover" className="book-image" onClick={handleOpenModal} />
       <div className="book-details">
         <p className="book-date">{new Date(book.postedAt).toLocaleDateString()}</p>
         <p className="book-price">${book.price_per_day}</p>
