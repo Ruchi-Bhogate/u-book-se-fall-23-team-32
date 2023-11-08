@@ -97,7 +97,7 @@ function PostBook() {
     <div>
      <Header />
     <div className="post-book-container">
-    <form onSubmit={handleSubmit} className="post-book-form" enctype="multipart/form-data">
+    <form onSubmit={handleSubmit} className="post-book-form" encType="multipart/form-data">
         <div className="form-group">
           <label>Title:</label>
           <input type="text" name="title" value={bookData.title} onChange={handleChange} required />
