@@ -48,7 +48,7 @@ router.post('/postbook', verifyToken, upload.single('image'), async (req, res) =
           
         const bookData = req.body;
         console.log('no body',req.body);
-        bookData.image = req.file.path;
+        bookData.image = req.body.file.path;
         const authHeader = req.headers.authorization;
         const token = authHeader.split(' ')[1]; 
         const decoded = jwt.verify(token, 'mysecretkey170904');
