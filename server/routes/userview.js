@@ -34,7 +34,7 @@ const storage = multer.diskStorage({
     }
   });
   
-const upload = multer({ dest:storage});
+const upload = multer({ storage:storage});
 
 router.post('/postbook', verifyToken, upload.single('image'), async (req, res) => {
     try {
@@ -48,7 +48,7 @@ router.post('/postbook', verifyToken, upload.single('image'), async (req, res) =
           
         const bookData = req.body;
         console.log('file.path',req.file?.path);
-        //bookData.image = req.file.path;
+        bookData.image = req.file.path;
         const authHeader = req.headers.authorization;
         const token = authHeader.split(' ')[1]; 
         const decoded = jwt.verify(token, 'mysecretkey170904');
