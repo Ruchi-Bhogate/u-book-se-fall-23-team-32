@@ -1,5 +1,4 @@
 
-
 import React, { useState } from 'react';
 import '../styles/BookCard.css';
 
@@ -20,9 +19,11 @@ function BookCard({ book }) {
 
   return (
     <div className="book-card">
+      <div className="book-image-container">
       <img src={`http://localhost:8080/${book.image}`} alt="Book Cover" className="book-image" onClick={handleOpenModal} />
+      </div>
       <div className="book-details">
-        <p className="book-date">{new Date(book.postedAt).toLocaleDateString()}</p>
+        <p className="book-date">{new Date(book.postedAT).toLocaleDateString()}</p>
         <p className="book-price">${book.price_per_day}</p>
         <h3 className="book-title">{book.title}</h3>
       </div>
@@ -37,9 +38,8 @@ function BookCard({ book }) {
             <p>Year: {book.publication_year}</p>
             <p>Condition: {book.condition}</p>
             <p>Price per Day: ${book.price_per_day}</p>
-            <p>Location: {book.address}</p>
+            <p>Address: {book.address}</p>
             <p>Description: {book.description}</p>
-            {/* Add the rest of the book details here */}
           </div>
         </div>
       )}
