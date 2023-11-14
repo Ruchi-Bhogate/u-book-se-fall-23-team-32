@@ -69,7 +69,7 @@ module.exports = router;
 router.get('/browsebooks', async (req, res) => {
   try {
     const books = await Book.find().populate(); // This will also fetch the username of the owner if needed
-    console.log(books);
+    //console.log(books);
     res.json(books);
   } catch (error) {
     console.log(error)
