@@ -27,7 +27,7 @@ const verifyToken = (req, res, next) => {
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
-      cb(null, 'server/postedbooks/');
+      cb(null, './postedbooks/');
     },
     filename: function(req, file, cb) {
       cb(null, Date.now() + '-' + file.originalname);
@@ -47,7 +47,7 @@ router.post('/postbook', verifyToken, upload.single('image'), async (req, res) =
           }
           
         const bookData = req.body;
-        console.log('no body',req.body);
+        console.log('file.path',req.file?.path);
         bookData.image = req.file.path;
         const authHeader = req.headers.authorization;
         const token = authHeader.split(' ')[1]; 
