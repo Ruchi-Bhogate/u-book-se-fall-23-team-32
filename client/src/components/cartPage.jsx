@@ -1,8 +1,13 @@
 // CartPage.js
 import React, {  useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import '../styles/cartPage.css';
+import Header from './Header';
+import Footer from './Footer';
 
 function CartPage() {
+  const navigate = useNavigate();
   const [cartItems, setCartItems] = useState([]);
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -71,11 +76,19 @@ function CartPage() {
   
   // Function to calculate the total price of the cart
   const calculateTotal = (items) => {
-    return items.reduce((acc, item) => acc + item.price_per_day * item.days, 0).toFixed(2);
+      return items.reduce((acc, item) => acc + item.price_per_day * item.days, 0).toFixed(2);
   };
+
+  const handleCheckOut = (cartItems) =>{
+    const total = cartItems.reduce((acc, item) => acc + item.price_per_day * item.days, 0).toFixed(2);
+    console.log(total)
+    navigate('/payment', { state: { total } });
+  }
 
   return (
     <div>
+    <Header/>
+    <div className="cart-container">
       <h2>Your Cart</h2>
       {cartItems.length === 0 ? (
         <p>Your cart is empty.</p>
@@ -85,22 +98,29 @@ function CartPage() {
             <div key={item._id} className="cart-item">
               <h3>{item.title}</h3>
               <p>Price per Day: ${item.price_per_day}</p>
-              <button onClick={() => handleRemoveItem(item._id)}>Remove</button>
-            <div>
-              <button onClick={() => handleDecreaseDays(item)}>-</button>
-              <span> Days: {item.days} </span>
-              <button onClick={() => handleIncreaseDays(item)}>+</button>
+              <div className="cart-item-controls">
+                <button onClick={() => handleDecreaseDays(item)}>-</button>
+                <span> Days: {item.days} </span>
+                <button onClick={() => handleIncreaseDays(item)}>+</button>
+              </div>
+              <button className="cart-item-remove" onClick={() => handleRemoveItem(item._id)}>Remove</button>
             </div>
-          </div>
-        ))}
-
+          ))}
           <div className="cart-total">
             <h4>Total: ${calculateTotal(cartItems)}</h4>
           </div>
         </div>
       )}
     </div>
+    <div className="checkout-button-container">
+      <button className="checkout-button" onClick={() => handleCheckOut(cartItems)}>
+        Proceed to Checkout
+      </button>
+    </div>
+    <Footer/>
+    </div>
   );
 }
+
 
 export default CartPage;

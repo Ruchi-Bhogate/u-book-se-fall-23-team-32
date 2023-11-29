@@ -14,6 +14,7 @@ import Dashboard from './components/Dashboard';
 import PostBook from './components/PostBook';
 import BrowseBooksPage from './components/BrowseBooks';
 import CartPage from './components/cartPage';
+import PaymentPage from './components/PaymentPage';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             <Route path="/postbook" element={<PostBook/>}/>
             <Route path="/browsebooks" element={<BrowseBooksPage/>}/>
             <Route path="/cartpage" element={<CartPage/>}/>
+            <Route path="/payment" element={<PaymentPage/>}/>
           </Routes>
       </Router>
   );
