@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/Header.css';
+import { CartProvider } from './CartContext';
 
 function Header() {
   return (
@@ -13,6 +14,7 @@ function Header() {
           <li><Link to="/browsebooks">Browse Books</Link></li>
           <li><Link to="/my-books">My Books</Link></li>
           <li><Link to="/profile">Profile</Link></li>
+          <li><Link to="/cartpage">Cart</Link></li>
           <li><Link to="/logout">Logout</Link></li>
         </ul>
       </nav>

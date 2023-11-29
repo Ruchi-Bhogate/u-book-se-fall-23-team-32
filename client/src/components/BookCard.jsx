@@ -2,9 +2,15 @@
 import React, { useState } from 'react';
 import '../styles/BookCard.css';
 
-function BookCard({ book }) {
+
+function BookCard({ book, onAddToCart }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const handleAddToCart = () => {
+    onAddToCart(book);
+  };
+
+  
   const handleOpenModal = () => {
     setIsModalOpen(true);
     // Prevent the background from scrolling
@@ -40,6 +46,10 @@ function BookCard({ book }) {
             <p>Price per Day: ${book.price_per_day}</p>
             <p>Address: {book.address}</p>
             <p>Description: {book.description}</p>
+            <button className="view-button">View Location</button>
+            <div className="add-container">
+            <button className="add-button" onClick={handleAddToCart}>Add to cart</button>
+              </div>
           </div>
         </div>
       )}

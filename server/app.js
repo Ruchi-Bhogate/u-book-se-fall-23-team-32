@@ -39,6 +39,7 @@ app.use(
 app.use("/", require('./routes/user'));
 app.use('/auth', authRoutes);
 app.use("/userview", require('./routes/userview'));
+app.use("/cartview", require('./routes/cartview'));
 
 //ports
 //const port  = process.env.PORT || 8080;
