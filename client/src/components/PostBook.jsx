@@ -140,7 +140,7 @@ function PostBook() {
       </div>
         <div className="form-group">
           <label>Location:</label>
-          <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_API_KEY}>
+          <LoadScript googleMapsApiKey='AIzaSyAuhAVZf10KG1trTGAtF25hLt7aYkLIAfs'>
             <GoogleMap
               mapContainerStyle={mapContainerStyle}
               center={defaultCenter}

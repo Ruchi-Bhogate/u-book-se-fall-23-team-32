@@ -11,7 +11,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://ubook.onrender.com/login', {
+      const response = await axios.post('http://localhost:8080/login', {
         emailOrUsername,
         password,
       });
@@ -41,19 +41,17 @@ function Login() {
         </div>
         <button type="submit" className="submit-button">Login</button>
       </form>
-
       <div className="signup-link">
         <p>Don't have an account? <a href="/signup">Sign up</a></p>
       </div>
       <div className="social-login">
-        <a href="https://ubook.onrender.com/auth/google" className="google-login">Login with Google</a>
+        <a href="http://localhost:8080/auth/google" className="google-login">Login with Google</a>
       </div>
       <div className="forgot-password">
         <a href="/forgot">Forgot password?</a>
-
       </div>
     </div>
   );
 }
 
-export default Login;
+export default Login
