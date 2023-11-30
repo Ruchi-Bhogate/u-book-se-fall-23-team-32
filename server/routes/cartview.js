@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const Cart = require('../models/cart');
+const OrderDetails = require('../models/orderDetails');
 const User = require('../models/user_model');
 const jwt = require('jsonwebtoken'); // This should be at the top of your file
 
@@ -111,6 +112,48 @@ router.delete('/remove-cart-item/:itemId', async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).send('Internal Server Error');
+  }
+});
+
+router.post('/create-order', async (req, res) => {
+  const { amount, cardDetails } = req.body;
+
+  const authHeader = req.headers.authorization;
+  const token = authHeader.split(' ')[1];
+  const decoded = jwt.verify(token, 'mysecretkey170904');
+  const userId = decoded.userId;
+
+  
+    // Retrieve the cart items for the user
+    const cart = await Cart.findOne({ userId });
+    if (!cart) {
+      return res.status(404).json({ message: 'Cart not found for the user.' });
+    }
+
+    // Extract the cart items
+    const cartItems = cart.items;
+
+  try {
+    const orderDetails = new OrderDetails({
+      userId,
+      amount,
+      cardDetails: {
+        lastFourDigits: cardDetails.lastFourDigits, 
+        expiryDate: cardDetails.expiryDate
+      },
+      cartItems,
+      status: 'pending'
+    });
+
+    await orderDetails.save();
+
+    await Cart.findOneAndUpdate({ userId }, { $set: { items: [] } });
+    console.log(cartItems)
+    console.log(amount)
+    res.status(201).json({ message: 'Order has been created and is awaiting approval.', orderdata:{cartItems,amount} });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error creating order details.' });
   }
 });
 
