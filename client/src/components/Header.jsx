@@ -8,12 +8,11 @@ function Header() {
       <div className="logo">Logo</div>
       <nav>
         <ul className="nav-links">
-          <li><Link to="/Home">Home</Link></li>
           <li><Link to="/dashboard">Dashboard</Link></li>
           <li><Link to="/browsebooks">Browse Books</Link></li>
-          <li><Link to="/my-books">My Books</Link></li>
-          <li><Link to="/profile">Profile</Link></li>
+          <li><Link to="/my-books">Rented Books</Link></li>
           <li><Link to="/cartpage">Cart</Link></li>
+          <li><Link to="/profile">Profile</Link></li>
           <li><Link to="/logout">Logout</Link></li>
         </ul>
       </nav>

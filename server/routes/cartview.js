@@ -1,5 +1,7 @@
 // routes/cart.js
 const express = require('express');
+const Book = require('../models/Book');
+const nodemailer = require('nodemailer');
 const router = express.Router();
 const Cart = require('../models/cart');
 const OrderDetails = require('../models/orderDetails');
@@ -145,7 +147,61 @@ router.post('/create-order', async (req, res) => {
       status: 'pending'
     });
 
-    await orderDetails.save();
+    const savedOrderDetails = await orderDetails.save();
+   
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found.' });
+    }
+
+    // Set up nodemailer transport
+    let mailTransport = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "ubookint@gmail.com",
+        pass: "ufgj gaun khqk vpsn"  
+      }
+    });
+
+    for (const cartItem of cartItems) {
+      const book = await Book.findById(cartItem._id);
+      const owner = await User.findById(book.owner_user_id);
+      console.log(owner)
+      const emailDetails = {
+        from: "Support@UBook.com",
+        to: owner.email,
+        subject: "Your book has been rented",
+        html: `
+          <h1>Book Rental Notification</h1>
+          <p>Dear ${owner.firstname} ${owner.lastname},</p>
+          <p>Your book "${book.title}" has been rented.</p>
+          <p>Order Number: ${savedOrderDetails._id}</p>
+          <p>Rented by user ID: ${userId}</p>
+          <p>Rental period: ${cartItem.days} days</p>
+          <p>Total Amount: $${cartItem.price_per_day * cartItem.days}</p>
+          <p>Status: Awaiting your approval</p>
+        `
+      };
+
+      await mailTransport.sendMail(emailDetails);
+    }
+    // Prepare the email details
+    const details = {
+      from: "Support@UBook.com",
+      to: user.email,
+      subject: "Order Confirmation",
+      html: `
+        <h1>Order Confirmation</h1>
+        <p>Thank you for your order!</p>
+        <p>Order Number: ${savedOrderDetails._id}</p>
+        <p>Total Amount: $${amount}</p>
+        <h2>Order Details:</h2>
+        ${cartItems.map(item => `<p>${item.title} - ${item.days} days at $${item.price_per_day} per day</p>`).join('')}
+        <p>Status: Awaiting Approval</p>
+      `
+    };
+
+    await mailTransport.sendMail(details);
 
     await Cart.findOneAndUpdate({ userId }, { $set: { items: [] } });
     console.log(cartItems)

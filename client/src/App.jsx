@@ -16,6 +16,7 @@ import BrowseBooksPage from './components/BrowseBooks';
 import CartPage from './components/cartPage';
 import PaymentPage from './components/PaymentPage';
 import OrderConfirmationPage from './components/order-confirmation';
+import AdminOrdersPage from './components/AdminDashboard';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
             <Route path="/cartpage" element={<CartPage/>}/>
             <Route path="/payment" element={<PaymentPage/>}/>
             <Route path="/order-confirmation" element={<OrderConfirmationPage/>}/>
+            <Route path="/admindashboard" element={<AdminOrdersPage/>}/>
           </Routes>
       </Router>
   );

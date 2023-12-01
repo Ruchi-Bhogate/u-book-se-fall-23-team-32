@@ -19,6 +19,8 @@ const orderDetailsSchema = new mongoose.Schema({
     // Reference to cart item schema or embedded cart item details
     item: { type: mongoose.Schema.Types.ObjectId, ref: 'Item' },
     days: Number,
+    title: String,
+    price_per_day: Number,
   }],
   status: {
     type: String,

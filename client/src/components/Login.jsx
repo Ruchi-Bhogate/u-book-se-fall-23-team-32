@@ -20,8 +20,12 @@ function Login() {
         // Save token in local storage
         localStorage.setItem('token', response.data.token);
 
+        if(response.data.role === 'admin'){
         // Navigate to home page
-        navigate('/Dashboard');
+        navigate('/adminDashboard');}
+        else{
+          navigate('/Dashboard');
+        }
       }
     } catch (error) {
       console.error('Error logging in:', error.response.data);
