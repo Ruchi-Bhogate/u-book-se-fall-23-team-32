@@ -64,8 +64,6 @@ router.post('/postbook', verifyToken, upload.single('image'), async (req, res) =
     }
 });
 
-module.exports = router;
-
 router.get('/browsebooks', async (req, res) => {
   try {
     const books = await Book.find().populate(); // This will also fetch the username of the owner if needed

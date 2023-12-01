@@ -95,7 +95,6 @@ function Signup() {
           <select onChange={(e) => SetRole(e.target.value)} value={role} className="input-field">
             <option value="" disabled>select option</option>
             <option value="user">User</option>
-            <option value="renter">Renter</option>
             <option value="admin">Admin</option>
           </select>
         </div>

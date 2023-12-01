@@ -57,3 +57,19 @@
     cursor: pointer;
     color: #333; /* Adjust the color to match your app's theme */
   }
+
+  .add-button:hover {
+    background-color: #5e51a8;
+  }
+
+  .add-container button {
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+    text-align: center;
+    background-color: #1f25d5;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+  }

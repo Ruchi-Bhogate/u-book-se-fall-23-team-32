@@ -5,6 +5,8 @@ import BooksGrid from './BooksGrid';
 import '../styles/BrowseBooks.css';
 import Header from './Header';
 import Footer from './Footer';
+import { CartProvider } from './CartContext';
+
 
 function BrowseBooksPage() {
   const [books, setBooks] = useState([]);
@@ -53,6 +55,7 @@ const [publishedYear, setPublishedYear] = useState(null);
   }, [searchTerm, books, minCost, maxCost, selectedGenres, publishedYear]);
   
 return (
+  <CartProvider>
   <div>
 <Header />
   <div className="browse-books-page">
@@ -113,6 +116,7 @@ return (
   </div>
   <Footer />
    </div>
+   </CartProvider>
 );
 }
 
