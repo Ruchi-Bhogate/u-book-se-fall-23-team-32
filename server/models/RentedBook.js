@@ -19,6 +19,10 @@ const rentedBookSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
+  status : {
+    type: String,
+    required: true
+  },
 });
 
 const RentedBook = mongoose.model('RentedBook', rentedBookSchema);

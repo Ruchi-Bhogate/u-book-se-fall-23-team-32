@@ -41,6 +41,7 @@ app.use('/auth', authRoutes);
 app.use("/userview", require('./routes/userview'));
 app.use("/cartview", require('./routes/cartview'));
 app.use("/admin", require('./routes/admin'));
+app.use("/rentedbooks", require('./routes/rentedbooks'));
 
 //ports
 //const port  = process.env.PORT || 8080;
