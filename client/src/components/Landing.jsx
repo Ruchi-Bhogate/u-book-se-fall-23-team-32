@@ -23,9 +23,9 @@ const Landing = () => {
           justifyContent:'center',
         }}
       >
-        <Box sx={{width:'20%',padding:20}}>
+        <Box sx={{width:'25%',padding:20}}>
           <Box sx={{background:'white',opacity:'0.7'}} textAlign="center" mt={2} padding={10}>
-          <StepLabel sx={{justifyContent:'center'} }icon={ <img src={require("../images/ubook.png")} alt="" width="230" height="90" /> } />
+          <StepLabel sx={{justifyContent:'center'} }icon={ <img src={require("../images/ubook.png")} alt="" width="250" height="90" /> } />
           <Typography variant='h4' align ='center' color='MenuText'> Please choose to:</Typography>
             <Button style = {{marginRight:"32px"}} variant="contained"href="/Login">Login</Button>
             <Button variant="contained"href="/signup">Signup</Button>          
