@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import '../styles/PaymentPage.css';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function PaymentPage() {
+  const navigate = useNavigate();
   const location = useLocation();
   const total = location.state?.total;
 
@@ -49,7 +52,7 @@ function PaymentPage() {
         const month = parseInt(match[1], 10); // First capturing group: Month
         const year = parseInt(match[2], 10); // Second capturing group: Year
 
-      console.log(month)
+      //console.log(month)
       
       if (year < currentYear || (year === currentYear && month < currentMonth)) {
         isValid = false;
@@ -89,16 +92,46 @@ function PaymentPage() {
     return isValid;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (validateForm()) {
-      console.log("Form is valid. Submit payment.");
-      // Submit form or handle payment here
-    } else {
-      console.log("Form is invalid. Please correct the errors.");
-    }
-  };
+    
+        try {
+          // , store order details
+          const orderDetails = {
+            amount: total,
+            cardDetails: {
+              cardType: 'Visa', // Replace with actual card type
+              lastFourDigits: cardNumber.slice(-4), // Never store the full card number
+              expiryDate: expiryDate
+            },
+          };
+          const token = localStorage.getItem('token');
+            if (!token) {
+             alert('No token found. Please log in.');
+            return;
+            }
+          const response = await axios.post('http://localhost:8080/cartview/create-order', orderDetails, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+          
+          if (response.status === 201) {
+            const cartItems = response.data.orderdata.cartItems;
+            const total = response.data.orderdata.amount;
+            console.log(response.data);
+            //console.log(total)
+            alert("Payment is successful, your order is awaiting approval.");
+            navigate('/order-confirmation', { state: {cartItems,total } });
+          }
+        } catch (error) {
+          console.error("An error occurred during payment submission:", error);
+          alert("An error occurred during payment submission.");
+        }
+      } else {
+        console.log("Form is invalid. Please correct the errors.");
+      }
+    };
 
   return (
     <div className="payment-container">

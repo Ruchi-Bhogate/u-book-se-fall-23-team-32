@@ -13,20 +13,15 @@ const rentedBookSchema = new mongoose.Schema({
   },
   startDate: {
     type: Date,
-    required: true,
+    default: Date.now,
   },
-  endDate: {
-    type: Date,
-    required: true,
-  },
-  totalPrice: {
+  days : {
     type: Number,
-    required: true,
+    required: true
   },
-  status: {
+  status : {
     type: String,
-    required: true,
-    enum: ['Active', 'Completed'],
+    required: true
   },
 });
 

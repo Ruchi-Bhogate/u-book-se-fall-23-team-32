@@ -15,6 +15,9 @@ import PostBook from './components/PostBook';
 import BrowseBooksPage from './components/BrowseBooks';
 import CartPage from './components/cartPage';
 import PaymentPage from './components/PaymentPage';
+import OrderConfirmationPage from './components/order-confirmation';
+import AdminOrdersPage from './components/AdminDashboard';
+import RentedBooksPage from './components/RentedBooksPage';
 
 function App() {
   return (
@@ -34,6 +37,9 @@ function App() {
             <Route path="/browsebooks" element={<BrowseBooksPage/>}/>
             <Route path="/cartpage" element={<CartPage/>}/>
             <Route path="/payment" element={<PaymentPage/>}/>
+            <Route path="/order-confirmation" element={<OrderConfirmationPage/>}/>
+            <Route path="/admindashboard" element={<AdminOrdersPage/>}/>
+            <Route path="/rentedbookspage" element={<RentedBooksPage/>}/>
           </Routes>
       </Router>
   );
