@@ -96,6 +96,7 @@ function Signup() {
             <option value="" disabled>select option</option>
             <option value="user">User</option>
             <option value="admin">Admin</option>
+            <option value="owner">Owner</option>
           </select>
         </div>
         <div className="input-group">

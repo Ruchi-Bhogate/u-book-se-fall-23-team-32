@@ -23,8 +23,11 @@ function Login() {
         if(response.data.role === 'admin'){
         // Navigate to home page
         navigate('/adminDashboard');}
-        else{
+        else if(response.data.role === 'user'){
           navigate('/Dashboard');
+        }
+        else{
+          navigate('/OwnerDashboard');
         }
       }
     } catch (error) {

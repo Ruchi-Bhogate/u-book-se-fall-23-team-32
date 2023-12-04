@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../styles/RentedBooksPage.css'; 
+import Header from './Header';
+import Footer from './Footer';
 
 function RentedBooksPage({ userId }) {
   const [rentedBooks, setRentedBooks] = useState({ current: [], past: [], pendingReview: [] });
@@ -81,6 +83,8 @@ function RentedBooksPage({ userId }) {
   };  
 
   return (
+    <div>
+      <Header/>
     <div className="rented-books">
       <h1>My Rented Books</h1>
       <div className="filter-buttons">
@@ -143,6 +147,8 @@ function RentedBooksPage({ userId }) {
           </ul>
         </>
       )}
+    </div>
+    <Footer/>
     </div>
   );
 }

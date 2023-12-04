@@ -61,9 +61,6 @@ router.get('/getbooks', async (req, res) => {
   }
 });
 
-module.exports = router;
-
-
 router.post('/review/:userId', async (req, res) => {
   const { userId } = req.params;
   const authHeader = req.headers.authorization;
@@ -132,3 +129,5 @@ router.put('/update-status/:rentedBookId', async (req, res) => {
     res.status(500).json({ message: 'Error updating rented book status.' });
   }
 });
+
+module.exports = router;
