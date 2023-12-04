@@ -23,6 +23,11 @@ const rentedBookSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  reviewed:{
+    type: Boolean,
+    required: true,
+    default: false,
+  }
 });
 
 const RentedBook = mongoose.model('RentedBook', rentedBookSchema);
