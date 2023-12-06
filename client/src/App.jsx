@@ -21,6 +21,7 @@ import RentedBooksPage from './components/RentedBooksPage';
 import ProfilePage from './components/ProfilePage';
 import OwnerProfilePage from './components/OwnerProfile';
 import OwnerDashboard from './components/OwnerDashboard';
+import AllPostedBooks from './components/OwnerRentedOut';
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
             <Route path="/profile" element={<ProfilePage/>}/>
             <Route path="/ownerprofile" element={<OwnerProfilePage/>}/>
             <Route path="/ownerdashboard" element={<OwnerDashboard/>}/>
+            <Route path="/rentedoutbooks" element={<AllPostedBooks/>}/>
           </Routes>
       </Router>
   );

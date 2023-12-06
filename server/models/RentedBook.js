@@ -27,6 +27,11 @@ const rentedBookSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
     default: false,
+  },
+  ownerreview:{
+    type: Boolean,
+    required: true,
+    default: false,
   }
 });
 

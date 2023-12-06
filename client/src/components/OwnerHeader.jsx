@@ -10,7 +10,7 @@ function Header() {
         <ul className="nav-links">
           <li><Link to="/ownerdashboard">Dashboard</Link></li>
           <li><Link to="/postbook">PostBook</Link></li>
-          <li><Link to="/rentedbookspage">Rented out Books</Link></li>
+          <li><Link to="/rentedoutbooks">Rented out Books</Link></li>
           <li><Link to="/ownerprofile">Profile</Link></li>
           <li><Link to="/logout">Logout</Link></li>
         </ul>
