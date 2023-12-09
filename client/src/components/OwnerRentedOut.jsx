@@ -1,59 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../styles/RentedBooksPage.css'; 
-import Header from './Header';
-import Footer from './Footer';
 
-function RentedBooksPage({ userId }) {
-  const [rentedBooks, setRentedBooks] = useState({ current: [], past: [], pendingReview: [] });
-  const [selectedFilter, setSelectedFilter] = useState('current');
+function AllPostedBooks({ userId }) {
+    const [books, setBooks] = useState({ currentlyPosted: [], pastRented: [], pendingReviews: [] });
+    const [selectedFilter, setSelectedFilter] = useState('currentlyPosted');
 
   useEffect(() => {
-
-          const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
           if (!token) {
             alert('No token found. Please log in.');
             return;
           }
-
-         const fetchBooks = async () => {
-            try {
-              const response = await axios.get('http://localhost:8080/rentedbooks/getbooks',{
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                },
-              });
-              console.log(response.data)
-              setRentedBooks(response.data)
-            } catch (error) {
-              console.error('Error fetching rented books:', error);
-            }
-          };
-      
-          fetchBooks();
-        
-  }, []);
-
-  const handleReturnBook = async (rentedBookId) => {
-    try {
-      const response = await axios.put(`http://localhost:8080/rentedbooks/update-status/${rentedBookId}`, 
-        { status: 'returned' }, 
-        { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
-      );
-      console.log(response.data)
-      if (response.status === 200) {
-        // Update the state to reflect the change
-        setRentedBooks(prevState => ({
-          ...prevState,
-          current: prevState.current.filter(book => book._id !== rentedBookId),
-          past: [...prevState.past, response.data], // Add the returned book to past rentals
-          pendingReview: [...prevState.pendingReview, response.data] 
-        }));
+    const fetchBooks = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/rentedout/allbooks`,
+          { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } });
+          console.log(response.data);
+        setBooks(response.data);
+      } catch (error) {
+        console.error('Error fetching books', error);
       }
-    } catch (error) {
-      console.error('Error returning book:', error);
-    }
-  };
+    };
+
+    fetchBooks();
+  }, [userId]);
 
   const handleReviewSubmit = async (e, ownerId,rentedBookId) => {
     e.preventDefault();
@@ -61,7 +31,7 @@ function RentedBooksPage({ userId }) {
     
     try {
       console.log(ownerId)
-      const response = await axios.post(`http://localhost:8080/rentedbooks/review/${ownerId}`, { 
+      const response = await axios.post(`http://localhost:8080/rentedout/review/${ownerId}`, { 
         rating: rating.value,
         comment: review.value,
         rentedBookId
@@ -71,41 +41,55 @@ function RentedBooksPage({ userId }) {
       
       if (response.status === 200) {
         // Remove the reviewed book from pendingReview and update state
-        setRentedBooks(prevState => ({
+        setBooks(prevState => ({
           ...prevState,
           pendingReview: prevState.pendingReview.filter(book => book._id !== rentedBookId)
         }));
       }
-      console.log(rentedBooks);
+      console.log(books);
     } catch (error) {
       console.error('Error submitting review:', error);
     }
   };  
 
+  const handleDeleteBook = async (bookId) => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await axios.delete(`http://localhost:8080/rentedout/deletebook/${bookId}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+  
+      if (response.status === 200) {
+        setBooks(prevState => ({
+          ...prevState,
+          currentlyPosted: prevState.currentlyPosted.filter(book => book._id !== bookId),
+        }));
+      }
+    } catch (error) {
+      console.error('Error deleting book:', error);
+    }
+  };
   return (
-    <div>
-      <Header/>
-    <div className="rented-books">
-      <h1>My Rented Books</h1>
+    <div className="posted-books">
+      <h1>All Posted Books</h1>
       <div className="filter-buttons">
-        <button onClick={() => setSelectedFilter('current')}>Current Rentals</button>
+        <button onClick={() => setSelectedFilter('currentlyPosted')}>Currently Posted Books</button>
         <button onClick={() => setSelectedFilter('past')}>Past Rentals</button>
         <button onClick={() => setSelectedFilter('pendingReview')}>Pending Review</button>
       </div>
 
-      {selectedFilter === 'current' ? (
+      {selectedFilter === 'currentlyPosted' ? (
         <>
-          <h2>Current Rentals</h2>
+          <h2>Currently Posted</h2>
           <ul>
-        {rentedBooks.current.map(book => (
+        {books.currentlyPosted.map(book => (
           <li key={book._id}>
             <img src={book.image} alt={book.title} />
             <h3>{book.title}</h3>
             <p>Author: {book.author}</p>
             <p>Rented for {book.days} days</p>
             <p>Price per day: ${book.price_per_day}</p>
-            <button onClick={() => handleReturnBook(book._id)}>Return</button>
-            {/* Add more details as needed */}
+            <button onClick={() => handleDeleteBook(book._id)}>Delete Post</button>
           </li>
         ))}
       </ul>
@@ -114,7 +98,7 @@ function RentedBooksPage({ userId }) {
         <>
           <h2>Past Rentals</h2>
           <ul>
-        {rentedBooks.past.map(book => (
+        {books.pastRented.map(book => (
           <li key={book._id}>
             <img src={book.image} alt={book.title} />
             <h3>{book.title}</h3>
@@ -130,7 +114,7 @@ function RentedBooksPage({ userId }) {
         <>
           <h2>Pending Review</h2>
           <ul>
-            {rentedBooks.pendingReview.map(book => (
+            {books.pendingReviews.map(book => (
               <li key={book._id}>
                 <img src={book.image} alt={book.title} />
                 <h3>{book.title}</h3>
@@ -148,9 +132,7 @@ function RentedBooksPage({ userId }) {
         </>
       )}
     </div>
-    <Footer/>
-    </div>
   );
 }
 
-export default RentedBooksPage;
+export default AllPostedBooks;

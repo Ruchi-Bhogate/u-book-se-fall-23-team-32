@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import '../styles/PostBook.css';
-import Header from './Header';
+import OwnerHeader from './OwnerHeader';
 import Footer from './Footer';
 //import { useRef } from 'react';
 
@@ -95,7 +95,7 @@ function PostBook() {
 
   return (
     <div>
-     <Header />
+     <OwnerHeader />
     <div className="post-book-container">
     <form onSubmit={handleSubmit} className="post-book-form" enctype="multipart/form-data">
         <div className="form-group">
