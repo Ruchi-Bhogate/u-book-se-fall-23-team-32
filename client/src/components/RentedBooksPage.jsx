@@ -3,10 +3,13 @@ import axios from 'axios';
 import '../styles/RentedBooksPage.css'; 
 import Header from './Header';
 import Footer from './Footer';
+import ChatModal from "./ChatModal";
 
 function RentedBooksPage({ userId }) {
   const [rentedBooks, setRentedBooks] = useState({ current: [], past: [], pendingReview: [] });
   const [selectedFilter, setSelectedFilter] = useState('current');
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [chatWith, setChatWith] = useState("");
 
   useEffect(() => {
 
@@ -83,6 +86,7 @@ function RentedBooksPage({ userId }) {
   };  
 
   return (
+    <>
     <div>
       <Header/>
     <div className="rented-books">
@@ -99,12 +103,25 @@ function RentedBooksPage({ userId }) {
           <ul>
         {rentedBooks.current.map(book => (
           <li key={book._id}>
+            {console.log(book)}
             <img src={book.image} alt={book.title} />
             <h3>{book.title}</h3>
             <p>Author: {book.author}</p>
             <p>Rented for {book.days} days</p>
             <p>Price per day: ${book.price_per_day}</p>
             <button onClick={() => handleReturnBook(book._id)}>Return</button>
+            <button
+              onClick={() => {
+                setModalOpen(true);
+                setChatWith(book.owner_user_id)
+              }}
+              style={{
+                backgroundColor: '#a3c8e3',
+                color: 'black'
+              }}
+            >
+              Chat with the Owner
+            </button>
             {/* Add more details as needed */}
           </li>
         ))}
@@ -150,6 +167,14 @@ function RentedBooksPage({ userId }) {
     </div>
     <Footer/>
     </div>
+    <ChatModal
+        isModalOpen={isModalOpen}
+        setModalOpen={setModalOpen}
+        withId={chatWith}
+        withType="owner"
+        title="Owner"
+      />
+    </>
   );
 }
 
