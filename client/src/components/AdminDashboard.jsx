@@ -3,7 +3,8 @@ import axios from "axios";
 import "../styles/AdminOrdersPage.css";
 import { getAllChats } from "../api";
 import ChatModal from "./ChatModal";
-import {AppBar, Tab, Tabs} from '@mui/material';
+import {AppBar, Box, Grid, Tab, Tabs, ThemeProvider,createTheme,styled,Typography} from '@mui/material';
+import landing from '../images/Landing.jpg'
 
 function AdminOrdersPage(){
   const [orders, setOrders] = useState([]);
@@ -63,49 +64,79 @@ function AdminOrdersPage(){
     setIsModalOpen(false);
   };
 
+  const handleTabChange = (event: React.SyntheticEvent, newValue:string) => {
+    setFilter(newValue);
+  };
+  
+  const darkTheme = createTheme({
+    palette: {
+      mode:"dark",
+      background:{
+        default:'#000000'
+      } 
+    },
+  });
+  
+  const RedGrid = styled(Grid)({
+    backgroundColor: 'red', 
+    padding: '10px', 
+  });
+  
   return (
     <>
-      <div className="admin-orders">
-          <Tabs value={filter} onChange={(e) => setFilter(e.target.value)}>
-            <Tab value="pending" label="Pending"/>
-            <Tab value="approved" label="Approved"/>
-            <Tab value="declined" label="Declined"/>
-          </Tabs>
-        <ul>
-          {orders.map((order) => (
-            <li key={order._id} onClick={() => handleOrderSelect(order)}>
-              <div>Order ID: {order._id}</div>
-              <div>User ID: {order.userId}</div>
-              <div>Total Amount: ${order.amount}</div>
-              {order.status === "pending" && (
-                <>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleOrderUpdate(order._id, "approved");
-                    }}
-                  >
-                    Accept
-                  </button>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleOrderUpdate(order._id, "declined");
-                    }}
-                  >
-                    Decline
-                  </button>
-                </>
-              )}
-            </li>
-          ))}
-        </ul>
+    <ThemeProvider theme={darkTheme}>
+    <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static">
+          <Typography variant="h6" align="center">
+            <img src={require("../images/ubook.png")} alt="Icon" width="250" height="100" />
+          </Typography>
+        </AppBar>
+      </Box>
+    <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <div className="admin-orders">
+            <Tabs value={filter} onChange={handleTabChange}>         
+              <Tab value="pending" label="Pending"/>
+              <Tab value="approved" label="Approved"/>
+              <Tab value="declined" label="Declined"/>
+            </Tabs>
+          <ul>
+            {orders.map((order) => (
+              <li key={order._id} onClick={() => handleOrderSelect(order)}>
+                <div>Order ID: {order._id}</div>
+                <div>User ID: {order.userId}</div>
+                <div>Total Amount: ${order.amount}</div>
+                {order.status === "pending" && (
+                  <>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleOrderUpdate(order._id, "approved");
+                      }}
+                    >
+                      Accept
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleOrderUpdate(order._id, "declined");
+                      }}
+                    >
+                      Decline
+                    </button>
+                  </>
+                )}
+              </li>
+            ))}
+          </ul>
 
-        {isModalOpen && (
-          <OrderDetailsModal order={selectedOrder} onClose={closeModal} />
-        )}
-      </div>
-      <div className="admin-chat">
+          {isModalOpen && (
+            <OrderDetailsModal order={selectedOrder} onClose={closeModal} />
+          )}
+        </div>
+        </Grid>
+        <Grid item xs={6}>
+        <div className="admin-chat">
         <card >
           <h1>Chats</h1>
           {chats && chats.length > 0 ? (
@@ -127,6 +158,8 @@ function AdminOrdersPage(){
           )}
         </card>
       </div>
+        </Grid>
+      </Grid>
       <ChatModal
         isModalOpen={openChatModal}
         setModalOpen={setOpenChatModal}
@@ -134,6 +167,8 @@ function AdminOrdersPage(){
         withType={selectedChat?.role}
         title={selectedChat?.firstname}
       />
+    </ThemeProvider>
+      
     </>
   );
 }
