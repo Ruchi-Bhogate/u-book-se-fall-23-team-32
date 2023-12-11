@@ -4,8 +4,6 @@ import {Button} from '@mui/material';
 import landing from '../images/Landing.jpg'
 
 const Landing = () => {
-  //const defaultTheme = createTheme();
-  //const imageURL = "./";
   return (
   <>
     <Box sx={{background:'#1c1a1a'}}>

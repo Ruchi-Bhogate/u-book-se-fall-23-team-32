@@ -3,8 +3,9 @@ import axios from "axios";
 import "../styles/AdminOrdersPage.css";
 import { getAllChats } from "../api";
 import ChatModal from "./ChatModal";
+import {AppBar, Tab, Tabs} from '@mui/material';
 
-function AdminOrdersPage() {
+function AdminOrdersPage(){
   const [orders, setOrders] = useState([]);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -65,12 +66,11 @@ function AdminOrdersPage() {
   return (
     <>
       <div className="admin-orders">
-        <h1>Admin Orders Management</h1>
-        <select value={filter} onChange={(e) => setFilter(e.target.value)}>
-          <option value="pending">Pending</option>
-          <option value="approved">Approved</option>
-          <option value="declined">Declined</option>
-        </select>
+          <Tabs value={filter} onChange={(e) => setFilter(e.target.value)}>
+            <Tab value="pending" label="Pending"/>
+            <Tab value="approved" label="Approved"/>
+            <Tab value="declined" label="Declined"/>
+          </Tabs>
         <ul>
           {orders.map((order) => (
             <li key={order._id} onClick={() => handleOrderSelect(order)}>
