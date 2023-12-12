@@ -41,7 +41,7 @@ function Login() {
       <Box marginBottom={2}>
         {/* Logo */}
         <Typography variant="h6">
-          <img src={require("../images/ubook.png")} alt="Logo" width="25gui0" height="50" />
+          <img src={require("../images/ubook.png")} alt="Logo" width="250" height="50" />
         </Typography>
       </Box>
       <form onSubmit={handleSubmit} className="login-form">
