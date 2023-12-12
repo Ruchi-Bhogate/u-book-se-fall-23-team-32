@@ -43,30 +43,62 @@ function ProfilePage({ userId }) {
   };
 
   return (
-    <div>
-        <Header/>
-    <div>
-      <h1>User Profile</h1>
-      {isEditMode ? (
-        <form onSubmit={handleSubmit}>
-          <h4>firstname</h4>
-          <input name="firstname" value={userData.firstname} onChange={handleChange} />
-          <h4>lastname</h4>
-          <input name="lastname" value={userData.lastname} onChange={handleChange} />
-          {/* Add other editable fields here */}
-          <button type="submit">Save Changes</button>
-        </form>
-      ) : (
-        <div>
-          <p>First Name: {userData.firstname}</p>
-          <p>Last Name: {userData.lastname}</p>
-          <p>Email: {userData.email}</p>
-          <p>Username: {userData.username}</p>
-          <button onClick={handleEdit}>Edit Profile</button>
-        </div>
-      )}
-    </div>
-    <Footer/>
+    <div
+      style={{
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
+      <Header />
+      <card className="profile-card">
+        <h1>User Profile</h1>
+        {isEditMode ? (
+          <form className="profile-form" onSubmit={handleSubmit}>
+            <h4>First Name</h4>
+            <input
+              name="firstname"
+              value={userData.firstname}
+              onChange={handleChange}
+            />
+            <h4>Last Name</h4>
+            <input
+              name="lastname"
+              value={userData.lastname}
+              onChange={handleChange}
+            />
+            {/* Add other editable fields here */}
+            <button type="submit">Save Changes</button>
+            <button onClick={() => setIsEditMode(false)}>Cancel</button>
+          </form>
+        ) : (
+          <div>
+            <div className="profile-details">
+              <div
+              >
+                <h4>First Name</h4>
+                <p   style={{
+                  marginBottom: "20px",
+                }}>{userData.firstname}</p>
+                <h4>Last Name</h4>
+                <p>{userData.lastname}</p>
+              </div>
+              <div>
+                <h4>Email</h4>
+                <p   style={{
+                  marginBottom: "20px",
+                }}>{userData.email}</p>
+                <h4>Username</h4>
+                <p>{userData.username}</p>
+              </div>
+            </div>
+            <button className="edit-profile-button" onClick={handleEdit}>Edit Profile</button>
+          </div>
+        )}
+      </card>
+
+      <Footer />
     </div>
   );
 }
