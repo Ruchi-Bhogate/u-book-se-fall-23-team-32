@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { TextField, Button, Typography, Box } from '@mui/material';
 import axios from 'axios';
-import '../styles/Login.css';
 import { useNavigate } from 'react-router-dom';
+
+import '../styles/Login.css';
 
 function Login() {
   const navigate = useNavigate();
@@ -11,17 +13,23 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://ubook.onrender.com/login', {
+      const response = await axios.post('http://localhost:8080/login', {
         emailOrUsername,
         password,
       });
+
       console.log(response.data);
+
       if (response.data.token) {
-        // Save token in local storage
         localStorage.setItem('token', response.data.token);
 
-        // Navigate to home page
-        navigate('/Dashboard');
+        if (response.data.role === 'admin') {
+          navigate('/adminDashboard');
+        } else if (response.data.role === 'user') {
+          navigate('/Dashboard');
+        } else {
+          navigate('/OwnerDashboard');
+        }
       }
     } catch (error) {
       console.error('Error logging in:', error.response.data);
@@ -29,30 +37,58 @@ function Login() {
   };
 
   return (
-    <div className="login-container">
+    <Box className="login-container">
+      <Box marginBottom={2}>
+        {/* Logo */}
+        <Typography variant="h6">
+          <img src={require("../images/ubook.png")} alt="Logo" width="250" height="50" />
+        </Typography>
+      </Box>
       <form onSubmit={handleSubmit} className="login-form">
         <div className="input-group">
-          <label className="input-label">Email or Username:</label>
-          <input type="text" value={emailOrUsername} onChange={(e) => setEmailOrUsername(e.target.value)} className="input-field" />
+          <Typography variant="body1" className="input-label">
+            Email or Username:
+          </Typography>
+          <TextField
+            type="text"
+            value={emailOrUsername}
+            onChange={(e) => setEmailOrUsername(e.target.value)}
+            className="input-field"
+          />
         </div>
         <div className="input-group">
-          <label className="input-label">Password:</label>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="input-field" />
+          <Typography variant="body1" className="input-label">
+            Password:
+          </Typography>
+          <TextField
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="input-field"
+          />
         </div>
-        <button type="submit" className="submit-button">Login</button>
+        <Button type="submit" variant="contained" className="submit-button">
+          Login
+        </Button>
       </form>
-
-      <div className="signup-link">
-        <p>Don't have an account? <a href="/signup">Sign up</a></p>
-      </div>
-      <div className="social-login">
-        <a href="https://ubook.onrender.com/auth/google" className="google-login">Login with Google</a>
-      </div>
-      <div className="forgot-password">
-        <a href="/forgot">Forgot password?</a>
-
-      </div>
-    </div>
+      <Box className="signup-link">
+        <Typography variant="body1">
+          Don't have an account? <a href="/signup">Sign up</a>
+        </Typography>
+      </Box>
+      <Box className="social-login">
+        <Typography variant="body1">
+          <a href="http://localhost:8080/auth/google" className="google-login">
+            Login with Google
+          </a>
+        </Typography>
+      </Box>
+      <Box className="forgot-password">
+        <Typography variant="body1">
+          <a href="/forgot">Forgot password?</a>
+        </Typography>
+      </Box>
+    </Box>
   );
 }
 

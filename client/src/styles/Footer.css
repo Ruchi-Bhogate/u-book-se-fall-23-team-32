@@ -1,8 +1,12 @@
 .footer {
-    background-color: #f4f4f4;
-    padding: 20px;
-    text-align: center;
-  }
+  background-color: #f4f4f4;
+  padding: 10px;
+  text-align: center;
+  position: absolute;
+  bottom: 1;
+  width: 100%;
+  margin: auto;
+}
   
   .contact-info {
     margin-bottom: 10px;
