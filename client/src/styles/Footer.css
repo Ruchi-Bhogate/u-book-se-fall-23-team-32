@@ -1,11 +1,11 @@
 .footer {
   background-color: #f4f4f4;
-  padding: 20px;
+  padding: 10px;
   text-align: center;
   position: absolute;
-  bottom: 0;
+  bottom: 1;
   width: 100%;
-  margin: 0 auto;
+  margin: auto;
 }
   
   .contact-info {

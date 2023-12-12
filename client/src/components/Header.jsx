@@ -13,9 +13,8 @@ import { Button, AppBar, Toolbar, StepLabel } from "@mui/material";
            <AppBar sx ={{background:'#1c1a1a',opacity:'0.8'}}>
              <Toolbar>
                <StepLabel icon={ <img src={require("../images/ubook.png")} alt="" width="110" height="50" /> } />
-               <Button sx={{marginRight: "auto"}} variant="contained" href="/ownerdashboard">Dashboard</Button>
-               <Button sx={{marginRight: "auto"}} variant="contained" href="/postbook">Post Book</Button>
-               <Button sx={{marginRight: "auto"}} variant="contained" href="/rentedoutbooks">Rented Out Books</Button>
+               <Button sx={{marginRight: "auto"}} variant="contained" href="/dashboard">Dashboard</Button>
+               <Button sx={{marginRight: "auto"}} variant="contained" href="/browsebooks">Browse Book</Button>
                <Button sx={{marginRight: "auto"}} variant="contained" href="/profile">User Profile</Button>
                <Button sx={{marginRight: "auto"}} variant="contained" href="/logout">Logout</Button>
                <Button sx={{marginRight: "auto"}} variant ="contained" onClick={()=> {setModalOpen(true)}}>Chat with Admin</Button>
