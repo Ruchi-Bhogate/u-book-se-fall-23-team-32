@@ -96,9 +96,9 @@ function AdminOrdersPage(){
         <Grid item xs={6}>
           <div className="admin-orders">
             <Tabs value={filter} onChange={handleTabChange}>         
-              <Tab value="pending" label="Pending"/>
-              <Tab value="approved" label="Approved"/>
-              <Tab value="declined" label="Declined"/>
+              <Tab sx={{color: "black"}} value="pending" label="Pending"/>
+              <Tab sx={{color: "black"}} value="approved" label="Approved"/>
+              <Tab sx={{color: "black"}} value="declined" label="Declined"/>
             </Tabs>
           <ul>
             {orders.map((order) => (
