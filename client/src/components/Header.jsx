@@ -2,43 +2,26 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Header.css";
 import ChatModal from "./ChatModal";
+import { Button, AppBar, Toolbar, StepLabel } from "@mui/material";
 
-function Header() {
-  const [isModalOpen, setModalOpen] = useState(false);
-  return (
-    <>
-      <header className="header">
-        <div className="logo">Logo</div>
-        <nav>
-          <ul className="nav-links">
-            <li>
-              <Link to="/dashboard">Dashboard</Link>
-            </li>
-            <li>
-              <Link to="/browsebooks">Browse Books</Link>
-            </li>
-            <li>
-              <Link to="/rentedbookspage">Rented Books</Link>
-            </li>
-            <li>
-              <Link to="/cartpage">Cart</Link>
-            </li>
-            <li>
-              <Link to="/profile">Profile</Link>
-            </li>
-            <li
-              onClick={() => {
-                setModalOpen(true);
-              }}
-            >
-              Chat With Admin
-            </li>
-            <li>
-              <Link to="/logout">Logout</Link>
-            </li>
-          </ul>
-        </nav>
-      </header>
+ 
+    const Header = () =>{
+      const [isModalOpen, setModalOpen] = useState(false);
+      return (
+      <>
+       <div>
+           <AppBar sx ={{background:'#1c1a1a',opacity:'0.8'}}>
+             <Toolbar>
+               <StepLabel icon={ <img src={require("../images/ubook.png")} alt="" width="110" height="50" /> } />
+               <Button sx={{marginRight: "auto"}} variant="contained" href="/ownerdashboard">Dashboard</Button>
+               <Button sx={{marginRight: "auto"}} variant="contained" href="/postbook">Post Book</Button>
+               <Button sx={{marginRight: "auto"}} variant="contained" href="/rentedoutbooks">Rented Out Books</Button>
+               <Button sx={{marginRight: "auto"}} variant="contained" href="/profile">User Profile</Button>
+               <Button sx={{marginRight: "auto"}} variant="contained" href="/logout">Logout</Button>
+               <Button sx={{marginRight: "auto"}} variant ="contained" onClick={()=> {setModalOpen(true)}}>Chat with Admin</Button>
+             </Toolbar>
+           </AppBar>
+       </div>
       <ChatModal
         isModalOpen={isModalOpen}
         setModalOpen={setModalOpen}
@@ -49,5 +32,4 @@ function Header() {
     </>
   );
 }
-
 export default Header;
