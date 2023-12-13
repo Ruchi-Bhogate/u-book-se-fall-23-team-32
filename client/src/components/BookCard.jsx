@@ -1,7 +1,5 @@
-
-import React, { useState } from 'react';
-import '../styles/BookCard.css';
-
+import React, { useState } from "react";
+import "../styles/BookCard.css";
 
 function BookCard({ book, onAddToCart }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -10,34 +8,45 @@ function BookCard({ book, onAddToCart }) {
     onAddToCart(book);
   };
 
-  
   const handleOpenModal = () => {
     setIsModalOpen(true);
     // Prevent the background from scrolling
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
     // Allow the background to scroll again
-    document.body.style.overflow = 'unset';
+    document.body.style.overflow = "unset";
   };
 
   return (
     <div className="book-card">
       <div className="book-image-container">
-      <img src={`http://localhost:8080/${book.image}`} alt="Book Cover" className="book-image" onClick={handleOpenModal} />
+        <img
+          src={`https://u-book-se-fall-23-team-32-hm4hr39j8-ruchis-projects-419a70ff.vercel.app/${book.image}`}
+          alt="Book Cover"
+          className="book-image"
+          onClick={handleOpenModal}
+        />
       </div>
       <div className="book-details">
-        <p className="book-date">{new Date(book.postedAT).toLocaleDateString()}</p>
+        <p className="book-date">
+          {new Date(book.postedAT).toLocaleDateString()}
+        </p>
         <p className="book-price">${book.price_per_day}</p>
         <h3 className="book-title">{book.title}</h3>
       </div>
-      
+
       {isModalOpen && (
         <div className="book-modal" onClick={handleCloseModal}>
-          <div className="book-modal-content" onClick={e => e.stopPropagation()}>
-            <span className="close-button" onClick={handleCloseModal}>&times;</span>
+          <div
+            className="book-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <span className="close-button" onClick={handleCloseModal}>
+              &times;
+            </span>
             <h3>{book.title}</h3>
             <p>Author: {book.author}</p>
             <p>Genre: {book.genre}</p>
@@ -48,8 +57,10 @@ function BookCard({ book, onAddToCart }) {
             <p>Description: {book.description}</p>
             <button className="view-button">View Location</button>
             <div className="add-container">
-            <button className="add-button" onClick={handleAddToCart}>Add to cart</button>
-              </div>
+              <button className="add-button" onClick={handleAddToCart}>
+                Add to cart
+              </button>
+            </div>
           </div>
         </div>
       )}

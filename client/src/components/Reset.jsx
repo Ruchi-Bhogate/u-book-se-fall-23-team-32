@@ -1,29 +1,29 @@
-
-
-import React, { useState } from 'react';
-import axios from 'axios';
-import {useSearchParams } from 'react-router-dom';
-import '../styles/Reset.css';
+import React, { useState } from "react";
+import axios from "axios";
+import { useSearchParams } from "react-router-dom";
+import "../styles/Reset.css";
 import { useNavigate } from "react-router-dom";
-
 
 function Reset() {
   const navigate = useNavigate();
-  const [password, setPassword] = useState('');
-  const [confirmpassword, setConfirmPassword] = useState('');
+  const [password, setPassword] = useState("");
+  const [confirmpassword, setConfirmPassword] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
-  const x = searchParams.get("token")
+  const x = searchParams.get("token");
   const doReset = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`http://localhost:8080/reset/${x}`, {
-        password,
-        confirmpassword
-      });
+      const response = await axios.post(
+        `https://u-book-se-fall-23-team-32-hm4hr39j8-ruchis-projects-419a70ff.vercel.app/reset/${x}`,
+        {
+          password,
+          confirmpassword,
+        }
+      );
       console.log(response.data);
-      navigate("/login")
+      navigate("/login");
     } catch (error) {
-      console.error('Error with new password', error.response.data);
+      console.error("Error with new password", error.response.data);
     }
   };
 
@@ -47,7 +47,9 @@ function Reset() {
             className="input-field"
           />
         </div>
-        <button type="submit" className="button">Change Password</button>
+        <button type="submit" className="button">
+          Change Password
+        </button>
       </form>
     </div>
   );

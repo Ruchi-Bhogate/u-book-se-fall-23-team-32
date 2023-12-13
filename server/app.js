@@ -35,7 +35,7 @@ app.use(morgan("dev"));
 app.use(express.json())
 app.use(
   cors({
-    origin:["http://localhost:3000", "https://ubookfront.onrender.com"],
+    origin:["http://localhost:3000", "https://u-book-se-fall-23-team-32-hm4hr39j8-ruchis-projects-419a70ff.vercel.app"],
   })
 );
 // app.post('/api/register',(req,res)=> {

@@ -17,9 +17,12 @@ function OwnerProfilePage({ userId }) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/profile/getdetails`, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      })
+      .get(
+        `https://u-book-se-fall-23-team-32-hm4hr39j8-ruchis-projects-419a70ff.vercel.app/profile/getdetails`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
+      )
       .then((response) => {
         setUserData(response.data);
       })
@@ -33,9 +36,13 @@ function OwnerProfilePage({ userId }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .put(`http://localhost:8080/profile/updatedetails`, userData, {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-      })
+      .put(
+        `https://u-book-se-fall-23-team-32-hm4hr39j8-ruchis-projects-419a70ff.vercel.app/profile/updatedetails`,
+        userData,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
+      )
       .then((response) => {
         console.log("Profile updated", response.data);
         setIsEditMode(false); // Exit edit mode after update
@@ -80,25 +87,34 @@ function OwnerProfilePage({ userId }) {
         ) : (
           <div>
             <div className="profile-details">
-              <div
-              >
+              <div>
                 <h4>First Name</h4>
-                <p   style={{
-                  marginBottom: "20px",
-                }}>{userData.firstname}</p>
+                <p
+                  style={{
+                    marginBottom: "20px",
+                  }}
+                >
+                  {userData.firstname}
+                </p>
                 <h4>Last Name</h4>
                 <p>{userData.lastname}</p>
               </div>
               <div>
                 <h4>Email</h4>
-                <p   style={{
-                  marginBottom: "20px",
-                }}>{userData.email}</p>
+                <p
+                  style={{
+                    marginBottom: "20px",
+                  }}
+                >
+                  {userData.email}
+                </p>
                 <h4>Username</h4>
                 <p>{userData.username}</p>
               </div>
             </div>
-            <button className="edit-profile-button" onClick={handleEdit}>Edit Profile</button>
+            <button className="edit-profile-button" onClick={handleEdit}>
+              Edit Profile
+            </button>
           </div>
         )}
       </card>

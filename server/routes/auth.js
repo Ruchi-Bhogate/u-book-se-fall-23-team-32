@@ -18,10 +18,10 @@ router.get('/google/callback',
         //localStorage.setItem('token', response.data.token);
         //res.redirect(`http://localhost:3000/Home?token=${token}`);
         //res.redirect('http://localhost:3000/Home');
-        res.redirect(`https://ubook.onrenderfront.com/authcallback?token=${token}`);
+        res.redirect(`https://u-book-se-fall-23-team-32-hm4hr39j8-ruchis-projects-419a70ff.vercel.app/authcallback?token=${token}`);
 
         //res.redirect('http://localhost:3000/Home');
-        //res.redirect('https://ubook.onrenderfront.com/Home')
+        //res.redirect('https://u-book-se-fall-23-team-32-hm4hr39j8-ruchis-projects-419a70ff.vercel.app/Home')
 
     }
 );

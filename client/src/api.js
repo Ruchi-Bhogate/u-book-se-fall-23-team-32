@@ -7,7 +7,8 @@ export const createMessage = async ({ participants, message }) => {
         Authorization: `Bearer ${token}`,
       },
     };
-    const apiUrl = "http://localhost:8080/messages";
+    const apiUrl =
+      "https://u-book-se-fall-23-team-32-hm4hr39j8-ruchis-projects-419a70ff.vercel.app/messages";
     const response = await axios.post(
       apiUrl,
       {
@@ -35,7 +36,9 @@ export const getMessages = async ({ withId }) => {
         Authorization: `Bearer ${token}`,
       },
     };
-    const apiUrl = "http://localhost:8080/messages?with=" + withId;
+    const apiUrl =
+      "https://u-book-se-fall-23-team-32-hm4hr39j8-ruchis-projects-419a70ff.vercel.app/messages?with=" +
+      withId;
     const response = await axios.get(apiUrl, headers);
     console.log("Messages:", response.data);
     return response.data;
@@ -43,7 +46,6 @@ export const getMessages = async ({ withId }) => {
     console.error("Error getting messages:", error.message);
   }
 };
-
 
 export const getAllChats = async () => {
   try {
@@ -53,11 +55,12 @@ export const getAllChats = async () => {
         Authorization: `Bearer ${token}`,
       },
     };
-    const apiUrl = "http://localhost:8080/messages/allchats";
+    const apiUrl =
+      "https://u-book-se-fall-23-team-32-hm4hr39j8-ruchis-projects-419a70ff.vercel.app/messages/allchats";
     const response = await axios.get(apiUrl, headers);
     console.log("Messages:", response.data);
     return response.data;
   } catch (error) {
     console.error("Error getting messages:", error.message);
   }
-}
+};

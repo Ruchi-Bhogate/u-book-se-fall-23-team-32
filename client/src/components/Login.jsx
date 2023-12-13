@@ -1,38 +1,41 @@
-import React, { useState } from 'react';
-import { TextField, Button, Typography, Box } from '@mui/material';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { TextField, Button, Typography, Box } from "@mui/material";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-import '../styles/Login.css';
+import "../styles/Login.css";
 
 function Login() {
   const navigate = useNavigate();
-  const [emailOrUsername, setEmailOrUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [emailOrUsername, setEmailOrUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/login', {
-        emailOrUsername,
-        password,
-      });
+      const response = await axios.post(
+        "https://u-book-se-fall-23-team-32-hm4hr39j8-ruchis-projects-419a70ff.vercel.app/login",
+        {
+          emailOrUsername,
+          password,
+        }
+      );
 
       console.log(response.data);
 
       if (response.data.token) {
-        localStorage.setItem('token', response.data.token);
+        localStorage.setItem("token", response.data.token);
 
-        if (response.data.role === 'admin') {
-          navigate('/adminDashboard');
-        } else if (response.data.role === 'user') {
-          navigate('/Dashboard');
+        if (response.data.role === "admin") {
+          navigate("/adminDashboard");
+        } else if (response.data.role === "user") {
+          navigate("/Dashboard");
         } else {
-          navigate('/OwnerDashboard');
+          navigate("/OwnerDashboard");
         }
       }
     } catch (error) {
-      console.error('Error logging in:', error.response.data);
+      console.error("Error logging in:", error.response.data);
     }
   };
 
@@ -41,7 +44,12 @@ function Login() {
       <Box marginBottom={2}>
         {/* Logo */}
         <Typography variant="h6">
-          <img src={require("../images/ubook.png")} alt="Logo" width="250" height="50" />
+          <img
+            src={require("../images/ubook.png")}
+            alt="Logo"
+            width="250"
+            height="50"
+          />
         </Typography>
       </Box>
       <form onSubmit={handleSubmit} className="login-form">
@@ -78,7 +86,10 @@ function Login() {
       </Box>
       <Box className="social-login">
         <Typography variant="body1">
-          <a href="http://localhost:8080/auth/google" className="google-login">
+          <a
+            href="https://u-book-se-fall-23-team-32-hm4hr39j8-ruchis-projects-419a70ff.vercel.app/auth/google"
+            className="google-login"
+          >
             Login with Google
           </a>
         </Typography>
